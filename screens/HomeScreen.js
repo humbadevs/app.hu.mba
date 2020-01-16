@@ -16,40 +16,24 @@ import {
 
 import { MonoText } from '../components/StyledText';
 
-export default function App() {
+export default class HomeScreen extends React.Component{
+  render() {
+     return (
+       <View>
+        
+         <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
+       </View>
+     );
+   }
 
-  const [value, onChangeText] = React.useState('');
-  const [value2, onChangeText2] = React.useState('');
-  return (
 
-    <View style={styles.container}>
 
-      <Text style={styles.textHeader}>Welcome to Humba!</Text>
-      <Text style={styles.textBody}>Login with Iserv:</Text>
-      <TextInput style={styles.form}
-      placeholder="E-mail"
-      onChangeText={text => onChangeText(text)}
-      value={value}
-       />
-       <TextInput style={styles.form}
-       placeholder="Password"
-       onChangeText={text => onChangeText2(text)}
-       value={value2}
-        />
+   _signOutAsync = async () => {
+     await AsyncStorage.clear();
+     this.props.navigation.navigate('Auth');
+   };
 
-      <Button
-          title="Press me"
-          color="#FA7268"
-          onPress={() => Alert.alert(value, value2)}
-        />
-        <Button
-            title="Press me"
-            color="#FA7268"
-            onPress={() => AsyncStorage.removeItem('userToken')}
-          />
-    </View>
 
-  );
 
 
 }
