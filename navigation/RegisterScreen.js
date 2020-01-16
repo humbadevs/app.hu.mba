@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   AsyncStorage,
   StyleSheet,
@@ -12,13 +12,20 @@ import {
 
 
 export default class ResetScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { text: '' };
+  }
+
   static navigationOptions = {
     title: 'Registrieren',
-  };
+  }
+
+  
 
   render() {
-//const [value, onChangeText] = React.useState('');
-//const [value2, onChangeText2] = React.useState('');
+
     return (
 
       <View>
@@ -26,24 +33,28 @@ export default class ResetScreen extends React.Component {
 
 
 
-          <TextInput style={styles.form}
+          <TextInput 
+          style={styles.form}
           placeholder="E-mail"
-          onChangeText={text => onChangeText(text)}
+          onChangeText={text => this.setState({text})}
 
            />
-           <TextInput style={styles.form}
+           <TextInput 
+           style={styles.form}
            placeholder="E-mail bestätigen"
-           onChangeText={text => onChangeText(text)}
+           onChangeText={text => this.setState({text})}
 
             />
-           <TextInput style={styles.form}
+           <TextInput 
+           style={styles.form}
            placeholder="Password"
-           onChangeText={text => onChangeText2(text)}
+           onChangeText={text => this.setState({text})}
 
             />
-            <TextInput style={styles.form}
+            <TextInput 
+            style={styles.form}
             placeholder="Password bestätigen"
-            onChangeText={text => onChangeText2(text)}
+            onChangeText={text => this.setState({text})}
 
              />
 

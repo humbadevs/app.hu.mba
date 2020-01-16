@@ -12,13 +12,18 @@ import {
 
 
 export default class SignInScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { text: '' };
+  }
+
   static navigationOptions = {
     title: 'Please sign in',
   };
 
   render() {
-//const [value, onChangeText] = React.useState('');
-//const [value2, onChangeText2] = React.useState('');
+
     return (
 
       <View>
@@ -29,20 +34,15 @@ export default class SignInScreen extends React.Component {
           <Text style={styles.textBody}>Login with Iserv:</Text>
           <TextInput style={styles.form}
           placeholder="E-mail"
-          onChangeText={text => onChangeText(text)}
+          onChangeText={text => this.setState({text})}
 
            />
            <TextInput style={styles.form}
            placeholder="Password"
-           onChangeText={text => onChangeText2(text)}
+           onChangeText={text => this.setState({text})}
 
             />
 
-          <Button
-              title="Press me"
-              color="#FA7268"
-              onPress={() => Alert.alert(value, value2)}
-            />
             <Button
             title="Registrieren"
             onPress={this._Registerasync}
