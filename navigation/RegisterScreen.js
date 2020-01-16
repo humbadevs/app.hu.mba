@@ -11,9 +11,9 @@ import {
 } from 'react-native';
 
 
-export default class SignInScreen extends React.Component {
+export default class ResetScreen extends React.Component {
   static navigationOptions = {
-    title: 'Please sign in',
+    title: 'Registrieren',
   };
 
   render() {
@@ -22,39 +22,46 @@ export default class SignInScreen extends React.Component {
     return (
 
       <View>
-        <Button title="Sign in!" onPress={this._signInAsync} />
 
 
-          <Text style={styles.textHeader}>Welcome to Humba!</Text>
-          <Text style={styles.textBody}>Login with Iserv:</Text>
+
+
           <TextInput style={styles.form}
           placeholder="E-mail"
           onChangeText={text => onChangeText(text)}
 
            />
            <TextInput style={styles.form}
+           placeholder="E-mail bestätigen"
+           onChangeText={text => onChangeText(text)}
+
+            />
+           <TextInput style={styles.form}
            placeholder="Password"
            onChangeText={text => onChangeText2(text)}
 
             />
+            <TextInput style={styles.form}
+            placeholder="Password bestätigen"
+            onChangeText={text => onChangeText2(text)}
+
+             />
 
           <Button
-              title="Press me"
+              title="Registrieren"
               color="#FA7268"
-              onPress={() => Alert.alert(value, value2)}
+              onPress={this._Erfolgasync}
             />
-            <Button
-            title="Registrieren"
-            onPress={this._Registerasync}
-            />
+
 
       </View>
     );
-  }
-  _Registerasync = async () => {
-    this.props.navigation.navigate('Register')
+    }
+    _Erfolgasync =  async () => {
 
-  };
+      this.props.navigation.navigate('Erfolg');
+  }
+
   _signInAsync = async() => {
     await AsyncStorage.setItem('userToken', 'abc');
     this.props.navigation.navigate('Main');

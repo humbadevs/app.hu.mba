@@ -5,8 +5,10 @@ import { createStackNavigator} from 'react-navigation-stack';
 import MainTabNavigator from './MainTabNavigator';
 import SignInScreen from './SignInScreen';
 import AuthLoadingScreen from './AuthLoadingScreen';
+import RegisterScreen from './RegisterScreen';
+import ErfolgScreen from './ErfolgScreen'
 
-const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+const AuthStack = createStackNavigator({ SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen });
 
 export default createAppContainer(
   createSwitchNavigator({

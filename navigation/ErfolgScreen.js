@@ -11,54 +11,37 @@ import {
 } from 'react-native';
 
 
-export default class SignInScreen extends React.Component {
+export default class ErfolgScreen extends React.Component {
   static navigationOptions = {
-    title: 'Please sign in',
+    title: 'Erfolg',
   };
 
   render() {
-//const [value, onChangeText] = React.useState('');
-//const [value2, onChangeText2] = React.useState('');
+
     return (
 
       <View>
-        <Button title="Sign in!" onPress={this._signInAsync} />
 
 
-          <Text style={styles.textHeader}>Welcome to Humba!</Text>
-          <Text style={styles.textBody}>Login with Iserv:</Text>
-          <TextInput style={styles.form}
-          placeholder="E-mail"
-          onChangeText={text => onChangeText(text)}
 
-           />
-           <TextInput style={styles.form}
-           placeholder="Password"
-           onChangeText={text => onChangeText2(text)}
 
-            />
-
+        <Text style={styles.textHeader}>Erfolg</Text>
           <Button
-              title="Press me"
+              title="Zurück"
               color="#FA7268"
-              onPress={() => Alert.alert(value, value2)}
+              onPress={this._Backasync}
             />
-            <Button
-            title="Registrieren"
-            onPress={this._Registerasync}
-            />
+
 
       </View>
     );
-  }
-  _Registerasync = async () => {
-    this.props.navigation.navigate('Register')
 
-  };
-  _signInAsync = async() => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('Main');
-  };
+  }
+  _Backasync = async () => {
+
+    this.props.navigation.navigate('SignIn');
+  }
+
 }
 const styles = StyleSheet.create({
   container: {
