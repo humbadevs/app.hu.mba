@@ -15,7 +15,12 @@ export default class ResetScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = { 
+      email: '',
+      emailConfirmation: '',
+      password: '',
+      passwordConfirmation: '',
+    };
   }
 
   static navigationOptions = {
@@ -30,47 +35,46 @@ export default class ResetScreen extends React.Component {
 
       <View>
 
-
-
-
           <TextInput 
           style={styles.form}
           placeholder="E-mail"
-          onChangeText={text => this.setState({text})}
+          onChangeText={(email) => this.setState({email})}
+          />
 
-           />
-           <TextInput 
-           style={styles.form}
-           placeholder="E-mail bestätigen"
-           onChangeText={text => this.setState({text})}
+          <TextInput 
+          style={styles.form}
+          placeholder="E-mail bestätigen"
+          onChangeText={(emailConfirmation) => this.setState({emailConfirmation})}
+          />
 
-            />
-           <TextInput 
+          <TextInput 
            style={styles.form}
            placeholder="Password"
-           onChangeText={text => this.setState({text})}
+           secureTextEntry={true}
+           onChangeText={(password) => this.setState({password})}
+          />
 
-            />
-            <TextInput 
-            style={styles.form}
-            placeholder="Password bestätigen"
-            onChangeText={text => this.setState({text})}
-
-             />
+          <TextInput 
+          style={styles.form}
+          placeholder="Password bestätigen"
+          secureTextEntry={true}
+          onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
+          />
 
           <Button
-              title="Registrieren"
-              color="#FA7268"
-              onPress={this._Erfolgasync}
-            />
-
+            title="Registrieren"
+            color="#FA7268"
+            onPress={this._Erfolgasync}
+          />
 
       </View>
     );
-    }
-    _Erfolgasync =  async () => {
+  }
+  
+  _Erfolgasync =  async () => {
 
       this.props.navigation.navigate('Erfolg');
+
   }
 
   _signInAsync = async() => {

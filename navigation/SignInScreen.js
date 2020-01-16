@@ -15,7 +15,10 @@ export default class SignInScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = { 
+      email: '',
+      Password: '',
+    };
   }
 
   static navigationOptions = {
@@ -34,12 +37,12 @@ export default class SignInScreen extends React.Component {
           <Text style={styles.textBody}>Login with Iserv:</Text>
           <TextInput style={styles.form}
           placeholder="E-mail"
-          onChangeText={text => this.setState({text})}
+          onChangeText={(email) => this.setState({email})}
 
            />
            <TextInput style={styles.form}
            placeholder="Password"
-           onChangeText={text => this.setState({text})}
+           onChangeText={(Password) => this.setState({Password})}
 
             />
 
@@ -57,6 +60,7 @@ export default class SignInScreen extends React.Component {
   };
   _signInAsync = async() => {
     await AsyncStorage.setItem('userToken', 'abc');
+    console.log(this.state.email);
     this.props.navigation.navigate('Main');
   };
 }
