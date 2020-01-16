@@ -11,11 +11,13 @@ import {
   Button,
   TextInput,
   Alert,
+  AsyncStorage,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
 export default function App() {
+
   const [value, onChangeText] = React.useState('');
   const [value2, onChangeText2] = React.useState('');
   return (
@@ -40,9 +42,18 @@ export default function App() {
           color="#FA7268"
           onPress={() => Alert.alert(value, value2)}
         />
+        <Button
+            title="Press me"
+            color="#FA7268"
+            onPress={() => AsyncStorage.removeItem('userToken')}
+          />
     </View>
+
   );
+
+
 }
+
 
 const styles = StyleSheet.create({
   container: {
