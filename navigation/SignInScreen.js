@@ -67,7 +67,7 @@ export default class SignInScreen extends React.Component {
 
     if(this.state.email !== '' && this.state.password!== ''){
 
-      fetch('http://yourIPv4:port/login', {
+      fetch('http://192.168.2.60:4563/login', {
         method: 'POST',
         headers: {
         Accept: 'application/json',
@@ -78,11 +78,13 @@ export default class SignInScreen extends React.Component {
           password: this.state.password,
         }),
       })
-      .then((response) => {
-        if(response.ok){
-          console.log(this.state.email);
+      .then( res => res.json() )
+      .then((data) => {
+          console.log(data.token) // should print your token!
           this.props.navigation.navigate('Main');
-        }       
+      })
+      .catch((error) => {
+        console.log(error);
       })
     }
   };

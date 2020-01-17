@@ -87,7 +87,7 @@ export default class ResetScreen extends React.Component {
   
   _Erfolgasync =  async () => {
     if(this.state.email == this.state.emailConfirmation && this.state.password == this.state.passwordConfirmation && this.state.firstname !== '' && this.state.lastname !== ''){
-      fetch('http://yourIPv4:port/register', {
+      fetch('http://192.168.2.60:4563/register', {
         method: 'POST',
         headers: {
         Accept: 'application/json',
