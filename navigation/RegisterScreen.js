@@ -18,6 +18,8 @@ export default class ResetScreen extends React.Component {
     this.state = { 
       email: '',
       emailConfirmation: '',
+      firstname: '',
+      lastname: '',
       password: '',
       passwordConfirmation: '',
     };
@@ -49,6 +51,18 @@ export default class ResetScreen extends React.Component {
 
           <TextInput 
            style={styles.form}
+           placeholder="Firstname"
+           onChangeText={(firstname) => this.setState({firstname})}
+          />
+
+          <TextInput 
+           style={styles.form}
+           placeholder="Lastname"
+           onChangeText={(lastname) => this.setState({lastname})}
+          />
+
+          <TextInput 
+           style={styles.form}
            placeholder="Password"
            secureTextEntry={true}
            onChangeText={(password) => this.setState({password})}
@@ -72,16 +86,32 @@ export default class ResetScreen extends React.Component {
   }
   
   _Erfolgasync =  async () => {
-
+    if(this.state.email == this.state.emailConfirmation && this.state.password == this.state.passwordConfirmation && this.state.firstname !== '' && this.state.lastname !== ''){
+      fetch('http://yourIPv4:port/register', {
+        method: 'POST',
+        headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          firstname: this.state.firstname,
+          lastname: this.state.lastname,
+          password: this.state.password,
+        }),
+      })
       this.props.navigation.navigate('Erfolg');
-
+    }
   }
 
   _signInAsync = async() => {
     await AsyncStorage.setItem('userToken', 'abc');
     this.props.navigation.navigate('Main');
   };
+
 }
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -6,8 +6,6 @@ import {
   Button,
   TextInput,
   Text,
-  Alert
-
 } from 'react-native';
 
 
@@ -17,12 +15,12 @@ export default class SignInScreen extends React.Component {
     super(props);
     this.state = { 
       email: '',
-      Password: '',
+      password: '',
     };
   }
 
   static navigationOptions = {
-    title: 'Please sign in',
+    title: 'Sign In',
   };
 
   render() {
@@ -30,40 +28,70 @@ export default class SignInScreen extends React.Component {
     return (
 
       <View>
-        <Button title="Sign in!" onPress={this._signInAsync} />
 
+        <Text style={styles.textHeader}>Welcome to Humba!</Text>
 
-          <Text style={styles.textHeader}>Welcome to Humba!</Text>
-          <Text style={styles.textBody}>Login with Iserv:</Text>
-          <TextInput style={styles.form}
+        <Text style={styles.textBody}>Login with Iserv:</Text>
+
+        <TextInput style={styles.form}
           placeholder="E-mail"
           onChangeText={(email) => this.setState({email})}
+        />
 
-           />
-           <TextInput style={styles.form}
-           placeholder="Password"
-           onChangeText={(Password) => this.setState({Password})}
+        <TextInput style={styles.form}
+          placeholder="Password"
+          onChangeText={(password) => this.setState({password})}
+        />
 
-            />
+        <Button 
+          title="Sign in!" 
+          onPress={this._signInAsync}
+        />
 
-            <Button
-            title="Registrieren"
-            onPress={this._Registerasync}
-            />
+        <Button
+          title="Registrieren"
+          onPress={this._Registerasync}
+        />
 
       </View>
     );
   }
+
   _Registerasync = async () => {
     this.props.navigation.navigate('Register')
-
   };
+
   _signInAsync = async() => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    console.log(this.state.email);
-    this.props.navigation.navigate('Main');
+
+    //tbd await AsyncStorage.setItem('userToken', 'abc');
+
+    if(this.state.email !== '' && this.state.password!== ''){
+
+      fetch('http://yourIPv4:port/login', {
+        method: 'POST',
+        headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        }),
+      })
+      .then((response) => {
+        if(response.ok){
+          console.log(this.state.email);
+          this.props.navigation.navigate('Main');
+        }       
+      })
+    }
   };
 }
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

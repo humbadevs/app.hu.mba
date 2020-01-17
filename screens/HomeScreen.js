@@ -29,7 +29,7 @@ export default class HomeScreen extends React.Component{
 
 
    _signOutAsync = async () => {
-     await AsyncStorage.clear();
+     //tbd await AsyncStorage.clear();
      this.props.navigation.navigate('Auth');
    };
 
