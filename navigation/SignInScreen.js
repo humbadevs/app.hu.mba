@@ -11,17 +11,58 @@ import {
 
 export default class SignInScreen extends React.Component {
 
+  //componentDidMount updates states
+  async componentDidMount(){
+
+    //Loading in the data
+    const email = await this.getRememberedEmail();
+    const password = await this.getRememberedPassword();
+    const token = await this.getRememberedToken();
+
+    this.setState({
+      email: email || '',
+      password: password || '',
+      token: token || ''
+    });
+
+    if(this.state.email !== '' && this.state.password !== ''){
+
+      //Posting the login to the API
+      fetch('http://192.168.2.60:4563/login', {
+        method: 'POST',
+        headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' . token,
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        }),
+      })
+      .then((data) => {
+            
+        //Navigating to main-page
+        this.props.navigation.navigate('Main');
+      })
+    }
+
+  }
+
   constructor(props) {
     super(props);
     this.state = { 
       email: '',
       password: '',
+      token: '',
     };
   }
+
 
   static navigationOptions = {
     title: 'Sign In',
   };
+
 
   render() {
 
@@ -57,42 +98,78 @@ export default class SignInScreen extends React.Component {
     );
   }
 
+
   _Registerasync = async () => {
     this.props.navigation.navigate('Register')
   };
 
+
   _signInAsync = async() => {
 
-    //tbd await AsyncStorage.setItem('userToken', 'abc');
+      if(this.state.email !== '' && this.state.password !== ''){
 
-    if(this.state.email !== '' && this.state.password!== ''){
+        //Posting the login to the API
+        fetch('http://192.168.2.60:4563/login', {
+          method: 'POST',
+          headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: this.state.email,
+            password: this.state.password,
+          }),
+        })
+        .then( res => res.json() )
+        .then((data) => {
+            
+            //Navigating to main-page
+            this.props.navigation.navigate('Main');
 
-      fetch('http://192.168.2.60:4563/login', {
-        method: 'POST',
-        headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-        }),
-      })
-      .then( res => res.json() )
-      .then((data) => {
-          console.log(data.token) // should print your token!
-          this.props.navigation.navigate('Main');
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    }
+            let token = data.token;
+            this.setEmail();
+            this.setPassword();
+            this.setToken();
+            return token;
+            
+            //debug console.log(token); 
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+      }  
   };
+
+  //Setting Up the Items
+  setEmail = async() => {
+    await AsyncStorage.setItem('rememberEmail', this.state.email);
+  };
+  setPassword = async() => {
+    await AsyncStorage.setItem('rememberPassword', this.state.password);
+  };
+  setToken = async() => {
+    await AsyncStorage.setItem('rememberPassword', this.token);
+  };
+
+  //Retrieving the locally saved items
+  getRememberedEmail = async() => {
+    const email = await AsyncStorage.getItem('rememberEmail');
+    return email;
+  };
+  getRememberedPassword = async() => {
+    const password = await AsyncStorage.getItem('rememberPassword');
+    return password;
+  };
+  getRememberedToken = async() => {
+    const token = await AsyncStorage.getItem('rememberToken');
+    return token;
+  };
+
 }
 
 
 
-
+//Stylesheet
 
 const styles = StyleSheet.create({
   container: {

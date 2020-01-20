@@ -29,6 +29,12 @@ export default class ResetScreen extends React.Component {
     title: 'Registrieren',
   }
 
+  /* tbd
+  async componentDidMount(){
+    
+  }
+  */
+
   
 
   render() {
@@ -103,11 +109,12 @@ export default class ResetScreen extends React.Component {
       this.props.navigation.navigate('Erfolg');
     }
   }
-
+  /* tbd
   _signInAsync = async() => {
     await AsyncStorage.setItem('userToken', 'abc');
     this.props.navigation.navigate('Main');
   };
+  */
 
 }
 
