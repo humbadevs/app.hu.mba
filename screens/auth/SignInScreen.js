@@ -25,27 +25,29 @@ export default class SignInScreen extends React.Component {
       token: token || ''
     });
 
-    if(this.state.email !== '' && this.state.password !== ''){
+    try {
+      if(this.state.email !== '' && this.state.password !== ''){
 
-      //Posting the login to the API
-      fetch('http://192.168.2.60:4563/login', {
-        method: 'POST',
-        headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' . token,
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-        }),
-      })
-      .then((data) => {
-            
+        //Posting the login to the API
+        fetch('http://192.168.2.60:4563/login', {
+          method: 'POST',
+          headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: this.state.email,
+            password: this.state.password,
+          }),
+        })             
         //Navigating to main-page
         this.props.navigation.navigate('Main');
-      })
+
+      } 
+    } catch (error) {
+      console.log(error);
     }
+      
 
   }
 
@@ -129,9 +131,11 @@ export default class SignInScreen extends React.Component {
             let token = data.token;
             this.setEmail();
             this.setPassword();
+            return token;
+            /* needs bugfixing
             this.setToken();
             return token;
-            
+            */
             //debug console.log(token); 
         })
         .catch((error) => {
@@ -142,27 +146,71 @@ export default class SignInScreen extends React.Component {
 
   //Setting Up the Items
   setEmail = async() => {
-    await AsyncStorage.setItem('rememberEmail', this.state.email);
+
+    try {
+      await AsyncStorage.setItem('email', this.state.email);
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
   setPassword = async() => {
-    await AsyncStorage.setItem('rememberPassword', this.state.password);
+
+    try {
+      await AsyncStorage.setItem('password', this.state.password);
+    } catch (error) {
+      console.log(error);
+    }    
   };
+  /* needs bugfixing
   setToken = async() => {
-    await AsyncStorage.setItem('rememberPassword', this.token);
+
+    try {
+      await AsyncStorage.setItem('token', this.token);
+    } catch (error) {
+      console.log(error);
+    }
   };
+  */
 
   //Retrieving the locally saved items
   getRememberedEmail = async() => {
-    const email = await AsyncStorage.getItem('rememberEmail');
-    return email;
+
+    try {
+      const email = await AsyncStorage.getItem('email');
+      if(email !== null){
+        return email;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   };
+
   getRememberedPassword = async() => {
-    const password = await AsyncStorage.getItem('rememberPassword');
-    return password;
+
+    try {
+      const password = await AsyncStorage.getItem('password');
+      if(password !== null){
+        return password;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   };
+
   getRememberedToken = async() => {
-    const token = await AsyncStorage.getItem('rememberToken');
-    return token;
+
+    try {
+      const token = await AsyncStorage.getItem('token');
+      if(token !== null){
+        return token;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
 }

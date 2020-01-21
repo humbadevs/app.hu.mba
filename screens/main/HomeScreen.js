@@ -14,7 +14,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 
-import { MonoText } from '.../components/StyledText';
+import { MonoText } from '../../components/StyledText';
 
 export default class HomeScreen extends React.Component{
   render() {
@@ -29,7 +29,8 @@ export default class HomeScreen extends React.Component{
 
 
    _signOutAsync = async () => {
-     //tbd await AsyncStorage.clear();
+     await AsyncStorage.removeItem('email');
+     await AsyncStorage.removeItem('password');
      this.props.navigation.navigate('Auth');
    };
 
