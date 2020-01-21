@@ -3,10 +3,10 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator} from 'react-navigation-stack';
 
 import MainTabNavigator from './MainTabNavigator';
-import SignInScreen from '../SignInScreen';
-import AuthLoadingScreen from '../AuthLoadingScreen';
-import RegisterScreen from '../RegisterScreen';
-import ErfolgScreen from '../ErfolgScreen'
+import SignInScreen from '../screens/auth/SignInScreen';
+import AuthLoadingScreen from '../screens/auth/AuthLoadingScreen';
+import RegisterScreen from '../screens/auth/RegisterScreen';
+import ErfolgScreen from '../screens/auth/ErfolgScreen'
 
 const AuthStack = createStackNavigator({ SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen });
 
