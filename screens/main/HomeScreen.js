@@ -14,13 +14,13 @@ import {
   AsyncStorage,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
+import { MonoText } from '.../components/StyledText';
 
 export default class HomeScreen extends React.Component{
   render() {
      return (
        <View>
-        
+
          <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
        </View>
      );
