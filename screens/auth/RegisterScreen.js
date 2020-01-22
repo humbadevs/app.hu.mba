@@ -15,7 +15,7 @@ export default class ResetScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       email: '',
       emailConfirmation: '',
       firstname: '',
@@ -31,11 +31,11 @@ export default class ResetScreen extends React.Component {
 
   /* tbd
   async componentDidMount(){
-    
+
   }
   */
 
-  
+
 
   render() {
 
@@ -43,38 +43,38 @@ export default class ResetScreen extends React.Component {
 
       <View>
 
-          <TextInput 
+          <TextInput
           style={styles.form}
           placeholder="E-mail"
           onChangeText={(email) => this.setState({email})}
           />
 
-          <TextInput 
+          <TextInput
           style={styles.form}
           placeholder="E-mail bestätigen"
           onChangeText={(emailConfirmation) => this.setState({emailConfirmation})}
           />
 
-          <TextInput 
+          <TextInput
            style={styles.form}
            placeholder="Firstname"
            onChangeText={(firstname) => this.setState({firstname})}
           />
 
-          <TextInput 
+          <TextInput
            style={styles.form}
            placeholder="Lastname"
            onChangeText={(lastname) => this.setState({lastname})}
           />
 
-          <TextInput 
+          <TextInput
            style={styles.form}
            placeholder="Password"
            secureTextEntry={true}
            onChangeText={(password) => this.setState({password})}
           />
 
-          <TextInput 
+          <TextInput
           style={styles.form}
           placeholder="Password bestätigen"
           secureTextEntry={true}
@@ -90,10 +90,10 @@ export default class ResetScreen extends React.Component {
       </View>
     );
   }
-  
+
   _Erfolgasync =  async () => {
     if(this.state.email == this.state.emailConfirmation && this.state.password == this.state.passwordConfirmation && this.state.firstname !== '' && this.state.lastname !== ''){
-      fetch('http://192.168.2.60:4563/register', {
+      fetch('http://192.168.137.180:4563/register', {
         method: 'POST',
         headers: {
         Accept: 'application/json',

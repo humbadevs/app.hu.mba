@@ -7,8 +7,9 @@ import SignInScreen from '../screens/auth/SignInScreen';
 import AuthLoadingScreen from '../screens/auth/AuthLoadingScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
 import ErfolgScreen from '../screens/auth/ErfolgScreen'
+import LandingScreen from '../screens/auth/Landing'
 
-const AuthStack = createStackNavigator({ SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen });
+const AuthStack = createStackNavigator({ Landing: LandingScreen, SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen });
 
 export default createAppContainer(
   createSwitchNavigator({

@@ -29,7 +29,7 @@ export default class SignInScreen extends React.Component {
       if(this.state.email !== '' && this.state.password !== ''){
 
         //Posting the login to the API
-        fetch('http://192.168.2.60:4563/login', {
+        fetch('http://192.168.137.180:4563/login', {
           method: 'POST',
           headers: {
           Accept: 'application/json',
@@ -39,21 +39,21 @@ export default class SignInScreen extends React.Component {
             email: this.state.email,
             password: this.state.password,
           }),
-        })             
+        })
         //Navigating to main-page
         this.props.navigation.navigate('Main');
 
-      } 
+      }
     } catch (error) {
       console.log(error);
     }
-      
+
 
   }
 
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       email: '',
       password: '',
       token: '',
@@ -86,14 +86,9 @@ export default class SignInScreen extends React.Component {
           onChangeText={(password) => this.setState({password})}
         />
 
-        <Button 
-          title="Sign in!" 
-          onPress={this._signInAsync}
-        />
-
         <Button
-          title="Registrieren"
-          onPress={this._Registerasync}
+          title="Sign in!"
+          onPress={this._signInAsync}
         />
 
       </View>
@@ -101,17 +96,13 @@ export default class SignInScreen extends React.Component {
   }
 
 
-  _Registerasync = async () => {
-    this.props.navigation.navigate('Register')
-  };
-
 
   _signInAsync = async() => {
 
       if(this.state.email !== '' && this.state.password !== ''){
 
         //Posting the login to the API
-        fetch('http://192.168.2.60:4563/login', {
+        fetch('http://192.168.137.180:4563/login', {
           method: 'POST',
           headers: {
           Accept: 'application/json',
@@ -124,7 +115,7 @@ export default class SignInScreen extends React.Component {
         })
         .then( res => res.json() )
         .then((data) => {
-            
+
             //Navigating to main-page
             this.props.navigation.navigate('Main');
 
@@ -136,12 +127,12 @@ export default class SignInScreen extends React.Component {
             this.setToken();
             return token;
             */
-            //debug console.log(token); 
+            //debug console.log(token);
         })
         .catch((error) => {
           console.log(error);
         })
-      }  
+      }
   };
 
   //Setting Up the Items
@@ -152,7 +143,7 @@ export default class SignInScreen extends React.Component {
     } catch (error) {
       console.log(error);
     }
-    
+
   };
   setPassword = async() => {
 
@@ -160,7 +151,7 @@ export default class SignInScreen extends React.Component {
       await AsyncStorage.setItem('password', this.state.password);
     } catch (error) {
       console.log(error);
-    }    
+    }
   };
   /* needs bugfixing
   setToken = async() => {
