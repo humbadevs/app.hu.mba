@@ -7,7 +7,8 @@ import {
   TextInput,
   Text,
   Alert,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 
 } from 'react-native';
 
@@ -18,30 +19,24 @@ export default class LandingScreen extends React.Component {
   render() {
 
     return (
-<View styles={styles.container}>
-      <ScrollView styles={styles.container}
-       contentContainerStyle={styles.contentContainer}>
+      <View styles={styles.container}>
+        <ScrollView styles={styles.container}
+          contentContainerStyle={styles.contentContainer}>
 
 
-<View style={styles.welcome}>
+          <View style={styles.welcome}>
 
-        <Text style={styles.textHeader}>Hallo!</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-              title="Login"
-              style={styles.button}
-              onPress={this._Loginasync}
-            />
-            <Button
-                title="Registrieren"
-                color="#FA7268"
-                style={styles.button}
-                onPress={this._Registerasync}
-              />
-</View>
-
-      </ScrollView>
+            <Text style={styles.textHeader}>Hallo!</Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={this._Loginasync}>
+              <Text style={styles.buttonText}> Login </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this._Registerasync}>
+              <Text style={styles.buttonText}> Register </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </View>
     );
 
@@ -61,13 +56,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
   contentContainer: {
     paddingTop: 30,
   },
@@ -77,12 +65,23 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonContainer: {
+    marginTop: 200,
     alignItems: 'center',
-    borderRadius: 10
+
+
 
   },
   button: {
-    borderRadius: 500
+    borderRadius: 500,
+    backgroundColor: 'black',
+    width: 300,
+    height: 40,
+    alignItems: 'center',
+    marginTop: 5
+  },
+  buttonText: {
+    color: 'white'
+
 
   }
 

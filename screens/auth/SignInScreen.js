@@ -6,13 +6,15 @@ import {
   Button,
   TextInput,
   Text,
+  TouchableOpacity,
 } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default class SignInScreen extends React.Component {
 
   //componentDidMount updates states
-  async componentDidMount(){
+  async componentDidMount() {
 
     //Loading in the data
     const email = await this.getRememberedEmail();
@@ -26,14 +28,14 @@ export default class SignInScreen extends React.Component {
     });
 
     try {
-      if(this.state.email !== '' && this.state.password !== ''){
+      if (this.state.email !== '' && this.state.password !== '') {
 
         //Posting the login to the API
         fetch('http://192.168.137.180:4563/login', {
           method: 'POST',
           headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             email: this.state.email,
@@ -70,26 +72,30 @@ export default class SignInScreen extends React.Component {
 
     return (
 
-      <View>
+      <View style={styles.container}>
+        <ScrollView style={styles.contentContainer}>
+          <View styles={styles.welcome}>
+            <Text style={styles.asdf}>Welcome to Humba!</Text>
+            <Text style={styles.asdf}>Login with Iserv:</Text>
+          </View>
+          <View style={styles.InputContainer}>
+            <TextInput style={styles.form}
+              placeholder="E-mail"
+              onChangeText={(email) => this.setState({ email })}
+            />
 
-        <Text style={styles.textHeader}>Welcome to Humba!</Text>
+            <TextInput style={styles.form}
+              placeholder="Password"
+              onChangeText={(password) => this.setState({ password })}
+            />
+          </View>
 
-        <Text style={styles.textBody}>Login with Iserv:</Text>
-
-        <TextInput style={styles.form}
-          placeholder="E-mail"
-          onChangeText={(email) => this.setState({email})}
-        />
-
-        <TextInput style={styles.form}
-          placeholder="Password"
-          onChangeText={(password) => this.setState({password})}
-        />
-
-        <Button
-          title="Sign in!"
-          onPress={this._signInAsync}
-        />
+          <View>
+            <TouchableOpacity style={styles.button} onPress={this._signInasync}>
+              <Text style={styles.buttonText}> Login </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
 
       </View>
     );
@@ -97,46 +103,46 @@ export default class SignInScreen extends React.Component {
 
 
 
-  _signInAsync = async() => {
+  _signInAsync = async () => {
 
-      if(this.state.email !== '' && this.state.password !== ''){
+    if (this.state.email !== '' && this.state.password !== '') {
 
-        //Posting the login to the API
-        fetch('http://192.168.137.180:4563/login', {
-          method: 'POST',
-          headers: {
+      //Posting the login to the API
+      fetch('http://192.168.137.180:4563/login', {
+        method: 'POST',
+        headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: this.state.email,
-            password: this.state.password,
-          }),
-        })
-        .then( res => res.json() )
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        }),
+      })
+        .then(res => res.json())
         .then((data) => {
 
-            //Navigating to main-page
-            this.props.navigation.navigate('Main');
+          //Navigating to main-page
+          this.props.navigation.navigate('Main');
 
-            let token = data.token;
-            this.setEmail();
-            this.setPassword();
-            return token;
-            /* needs bugfixing
-            this.setToken();
-            return token;
-            */
-            //debug console.log(token);
+          let token = data.token;
+          this.setEmail();
+          this.setPassword();
+          return token;
+          /* needs bugfixing
+          this.setToken();
+          return token;
+          */
+          //debug console.log(token);
         })
         .catch((error) => {
           console.log(error);
         })
-      }
+    }
   };
 
   //Setting Up the Items
-  setEmail = async() => {
+  setEmail = async () => {
 
     try {
       await AsyncStorage.setItem('email', this.state.email);
@@ -145,7 +151,7 @@ export default class SignInScreen extends React.Component {
     }
 
   };
-  setPassword = async() => {
+  setPassword = async () => {
 
     try {
       await AsyncStorage.setItem('password', this.state.password);
@@ -165,11 +171,11 @@ export default class SignInScreen extends React.Component {
   */
 
   //Retrieving the locally saved items
-  getRememberedEmail = async() => {
+  getRememberedEmail = async () => {
 
     try {
       const email = await AsyncStorage.getItem('email');
-      if(email !== null){
+      if (email !== null) {
         return email;
       }
     } catch (error) {
@@ -178,11 +184,11 @@ export default class SignInScreen extends React.Component {
 
   };
 
-  getRememberedPassword = async() => {
+  getRememberedPassword = async () => {
 
     try {
       const password = await AsyncStorage.getItem('password');
-      if(password !== null){
+      if (password !== null) {
         return password;
       }
     } catch (error) {
@@ -191,11 +197,11 @@ export default class SignInScreen extends React.Component {
 
   };
 
-  getRememberedToken = async() => {
+  getRememberedToken = async () => {
 
     try {
       const token = await AsyncStorage.getItem('token');
-      if(token !== null){
+      if (token !== null) {
         return token;
       }
     } catch (error) {
@@ -214,87 +220,42 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+
   },
   contentContainer: {
     paddingTop: 30,
   },
-  welcomeContainer: {
+  welcome: {
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
+  InputContainer: {
     alignItems: 'center',
-    marginHorizontal: 50,
+    marginTop: 10,
+    marginBottom: 20,
+
+
   },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
+  buttonContainer: {
+    marginTop: 200,
     alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+
+
+
   },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
+  button: {
+    borderRadius: 500,
+    backgroundColor: 'black',
+    width: 300,
+    height: 40,
     alignItems: 'center',
+    marginTop: 5
   },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+  buttonText: {
+    color: 'white'
+
+
+  }
+
 });
