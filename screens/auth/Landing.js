@@ -11,15 +11,18 @@ import {
   TouchableOpacity
 
 } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 
 
 export default class LandingScreen extends React.Component {
 
-
+  static navigationOptions = {
+    header: null,
+  };
   render() {
 
     return (
-      <View styles={styles.container}>
+      <SafeAreaView styles={styles.container}>
         <ScrollView styles={styles.container}
           contentContainerStyle={styles.contentContainer}>
 
@@ -37,7 +40,7 @@ export default class LandingScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
 
   }
@@ -54,14 +57,16 @@ export default class LandingScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    //backgroundColor: 'black'
+
   },
   contentContainer: {
     paddingTop: 30,
+    backgroundColor: '#fff',
   },
   welcome: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 250,
     marginBottom: 20,
   },
   buttonContainer: {
@@ -70,19 +75,27 @@ const styles = StyleSheet.create({
 
 
 
+
   },
   button: {
     borderRadius: 500,
-    backgroundColor: 'black',
+    backgroundColor: '#FA7268',
     width: 300,
     height: 40,
+    marginTop: 5,
+    borderColor: 'black',
+    borderWidth: 3,
     alignItems: 'center',
-    marginTop: 5
+    
+    
+    
   },
   buttonText: {
-    color: 'white'
-
-
+    
+    color: 'white',
+    textAlignVertical: 'center',
+    marginTop: 5
+  
   }
 
 });

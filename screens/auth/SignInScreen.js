@@ -7,6 +7,7 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -72,7 +73,7 @@ export default class SignInScreen extends React.Component {
 
     return (
 
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <ScrollView style={styles.contentContainer}>
           <View styles={styles.welcome}>
             <Text style={styles.asdf}>Welcome to Humba!</Text>
@@ -90,14 +91,14 @@ export default class SignInScreen extends React.Component {
             />
           </View>
 
-          <View>
+          <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={this._signInasync}>
               <Text style={styles.buttonText}> Login </Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
 
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -255,6 +256,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white'
 
+
+  },
+  asdf: {
+    textAlign: "center",
 
   }
 

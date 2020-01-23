@@ -9,6 +9,8 @@ import {
   Alert
 
 } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-navigation';
 
 
 export default class ResetScreen extends React.Component {
@@ -40,64 +42,68 @@ export default class ResetScreen extends React.Component {
   render() {
 
     return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView styles={styles.contentContainer}>
+          <View style={styles.textInputContainer}>
 
-      <View>
+            <TextInput
+              style={styles.form}
+              placeholder="E-mail"
+              onChangeText={(email) => this.setState({ email })}
+            />
 
-          <TextInput
-          style={styles.form}
-          placeholder="E-mail"
-          onChangeText={(email) => this.setState({email})}
-          />
+            <TextInput
+              style={styles.form}
+              placeholder="E-mail bestätigen"
+              onChangeText={(emailConfirmation) => this.setState({ emailConfirmation })}
+            />
 
-          <TextInput
-          style={styles.form}
-          placeholder="E-mail bestätigen"
-          onChangeText={(emailConfirmation) => this.setState({emailConfirmation})}
-          />
+            <TextInput
+              style={styles.form}
+              placeholder="Vorname"
+              onChangeText={(firstname) => this.setState({ firstname })}
+            />
 
-          <TextInput
-           style={styles.form}
-           placeholder="Firstname"
-           onChangeText={(firstname) => this.setState({firstname})}
-          />
+            <TextInput
+              style={styles.form}
+              placeholder="Nachname"
+              onChangeText={(lastname) => this.setState({ lastname })}
+            />
 
-          <TextInput
-           style={styles.form}
-           placeholder="Lastname"
-           onChangeText={(lastname) => this.setState({lastname})}
-          />
+            <TextInput
+              style={styles.form}
+              placeholder="Passwort"
+              secureTextEntry={true}
+              onChangeText={(password) => this.setState({ password })}
+            />
 
-          <TextInput
-           style={styles.form}
-           placeholder="Password"
-           secureTextEntry={true}
-           onChangeText={(password) => this.setState({password})}
-          />
+            <TextInput
+              style={styles.form}
+              placeholder="Passwort bestätigen"
+              secureTextEntry={true}
+              onChangeText={(passwordConfirmation) => this.setState({ passwordConfirmation })}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+<TouchableOpacity style={styles.button}>
+  <Text style={styles.buttonText}>
+    Registrieren
+  </Text>
+</TouchableOpacity>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
 
-          <TextInput
-          style={styles.form}
-          placeholder="Password bestätigen"
-          secureTextEntry={true}
-          onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
-          />
-
-          <Button
-            title="Registrieren"
-            color="#FA7268"
-            onPress={this._Erfolgasync}
-          />
-
-      </View>
     );
   }
 
-  _Erfolgasync =  async () => {
-    if(this.state.email == this.state.emailConfirmation && this.state.password == this.state.passwordConfirmation && this.state.firstname !== '' && this.state.lastname !== ''){
+  _Erfolgasync = async () => {
+    if (this.state.email == this.state.emailConfirmation && this.state.password == this.state.passwordConfirmation && this.state.firstname !== '' && this.state.lastname !== '') {
       fetch('http://192.168.137.180:4563/register', {
         method: 'POST',
         headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: this.state.email,
@@ -122,88 +128,45 @@ export default class ResetScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+    //backgroundColor: 'black'
+
   },
   contentContainer: {
     paddingTop: 30,
+    backgroundColor: '#fff',
   },
-  welcomeContainer: {
+  textInputContainer: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 30,
     marginBottom: 20,
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
+  buttonContainer: {
+    marginTop: 200,
     alignItems: 'center',
-    marginHorizontal: 50,
+
+
+
+
   },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
+  button: {
+    borderRadius: 500,
+    backgroundColor: '#FA7268',
+    width: 300,
+    height: 40,
     marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
+    borderColor: 'black',
+    borderWidth: 3,
     alignItems: 'center',
+    
+    
+    
   },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+  buttonText: {
+    
+    color: 'white',
+    textAlignVertical: 'center',
+    marginTop: 5
+  
+  }
+
 });
