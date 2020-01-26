@@ -4,9 +4,10 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import HomeScreen from '../screens/main/HomeScreen';
+import NewScreen from '../screens/main/NewScreen';
+import LinksScreen from '../screens/main/LinksScreen';
+import SettingsScreen from '../screens/main/SettingsScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -35,6 +36,29 @@ HomeStack.navigationOptions = {
 };
 
 HomeStack.path = '';
+
+const NewStack = createStackNavigator( //your Code goes here!
+  {
+    New: NewScreen,
+  },
+  config
+);
+
+NewStack.navigationOptions = { //was unten in der Leiste steht
+  tabBarLabel: 'New',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
+
+NewStack.path = ''; //auch nicht vergessen!
 
 const LinksStack = createStackNavigator(
   {
@@ -70,9 +94,10 @@ SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
+  NewStack,
   LinksStack,
   SettingsStack,
-});
+}); //hier auch hinzufügen
 
 tabNavigator.path = '';
 
