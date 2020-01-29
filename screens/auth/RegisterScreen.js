@@ -85,7 +85,7 @@ export default class ResetScreen extends React.Component {
             />
           </View>
           <View style={styles.buttonContainer}>
-<TouchableOpacity style={styles.button}  onPress={this._Erfolgasync}>
+<TouchableOpacity style={styles.button}  onPress={this._ErfolgasyncLi}>
   <Text style={styles.buttonText}>
     Registrieren
   </Text>
