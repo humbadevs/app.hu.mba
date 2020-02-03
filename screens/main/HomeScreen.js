@@ -12,27 +12,53 @@ import {
   TextInput,
   Alert,
   AsyncStorage,
+  SafeAreaView,
+  FlatList
 } from 'react-native';
+
 
 import { MonoText } from '../../components/StyledText';
 
-export default class HomeScreen extends React.Component{
+export default class HomeScreen extends React.Component {
   render() {
-     return (
-       <View>
+    //Array in das die Daten rein sollen
+    const list = [{ key:'Baum1', location:'Park1'},
+    { key:'Baum2', location:'Park2' }];
+    return (
+      
+          <View style={styles.container}>
+            
+            { list.length > 0 ? 
+                <FlatList data={list}
+                    renderItem={({item})=> (
+                <View style={{borderBottomColor:'#999', padding:10}}>
+            <Text style={{fontSize:60, fontWeight:'bold', color:'#333'}}>
+                {item.key}
+            </Text>
+            <Text style={{fontSize:36, color:'#999'}}>
+                {item.location}
+            </Text>
+        </View>
+                    
+            )} />
+            
+            :
+                <Text style={{fontSize: 48, color:'red'}}>
+                    Nichts zu sehen
+                </Text>
+            }
+            </View>
+      
+    );
+  }
 
-         <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
-       </View>
-     );
-   }
 
 
-
-   _signOutAsync = async () => {
-     await AsyncStorage.removeItem('email');
-     await AsyncStorage.removeItem('password');
-     this.props.navigation.navigate('Auth');
-   };
+  _signOutAsync = async () => {
+    await AsyncStorage.removeItem('email');
+    await AsyncStorage.removeItem('password');
+    this.props.navigation.navigate('Auth');
+  };
 
 
 
