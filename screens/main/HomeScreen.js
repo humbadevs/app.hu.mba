@@ -13,63 +13,85 @@ import {
   Alert,
   AsyncStorage,
   SafeAreaView,
-  FlatList
+  FlatList,
 } from 'react-native';
+import * as Font from 'expo-font';
+
 
 
 import { MonoText } from '../../components/StyledText';
+import { render } from 'react-dom';
 
 export default class HomeScreen extends React.Component {
+  static navigationOptions = {
+    header: null,
+  };
+  componentDidMount() {
+    Font.loadAsync({
+      'monserat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
+    });
+  }
   render() {
     //Array in das die Daten rein sollen
-    const list = [{ key:'Baum1', location:'Park1'},
-    { key:'Baum2', location:'Park2' }];
+    //Die pic Links können api Links sein
+    const list = [{ key: 'Baum1', time: 'Noch 20 min', activity: 'Essen gehen', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Birnbaum_am_Lerchenberg_retouched.jpg/310px-Birnbaum_am_Lerchenberg_retouched.jpg' },
+    { key: 'Baum2', time: 'Noch 180 min', activity: 'Essen gehen', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ceiba_sp_branches.jpg/100px-Ceiba_sp_branches.jpg' },
+    { key: 'Baum3', time: 'Noch 150 min', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ceiba_sp_branches.jpg/100px-Ceiba_sp_branches.jpg' },
+    ];
     return (
-      
-          <View style={styles.container}>
-            
-            { list.length > 0 ? 
-                <FlatList data={list}
-                    renderItem={({item})=> (
-                <View style={{borderBottomColor:'#999', padding:10}}>
-            <Text style={{fontSize:60, fontWeight:'bold', color:'#333'}}>
-                {item.key}
-            </Text>
-            <Text style={{fontSize:36, color:'#999'}}>
-                {item.location}
-            </Text>
+
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Image
+            style={{ width: 31, height: 31, }}
+            source={require('../../assets/images/icon_transparent_bg_humba.png')}
+          />
         </View>
-                    
+
+        {list.length > 0 ?
+          <FlatList data={list}
+            renderItem={({ item }) => (
+              <View style={styles.contentContainer}>
+                <View style={styles.textContainer}>
+                  <Text style={styles.text1}>
+                    {item.key}
+                  </Text>
+                  <Text style={styles.text2}>
+                    {item.time}
+                  </Text>
+                  {item.activity != null &&
+                    <Text style={styles.text1}>
+                      {item.activity}
+                    </Text>
+                  }
+                </View>
+                <View style={styles.ImageContainer}>
+                  <View style={styles.Imageborder}>
+                    <Image style={styles.Image}
+                      source={{ uri: item.pic }}
+                    />
+                  </View>
+                </View>
+              </View>
+
             )} />
-            
-            :
-                <Text style={{fontSize: 48, color:'red'}}>
-                    Nichts zu sehen
+
+          :
+          <Text style={{ fontSize: 48, color: 'red' }}>
+            Nichts zu sehen
                 </Text>
-            }
-            </View>
-      
+        }
+
+      </View>
+
     );
   }
-
-
-
-  _signOutAsync = async () => {
-    await AsyncStorage.removeItem('email');
-    await AsyncStorage.removeItem('password');
-    this.props.navigation.navigate('Auth');
-  };
-
-
-
-
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#151515',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -79,7 +101,58 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentContainer: {
+    flex: 1,
+    flexDirection: 'row',
     paddingTop: 30,
+    height: 140,
+  },
+  textContainer: {
+    flex: 5,
+    flexDirection: 'column',
+    backgroundColor: '#252525',
+    marginRight: 50,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+    justifyContent: 'center'
+  },
+  text1: {
+    fontSize: 17,
+    color: '#FFF',
+    textAlign: 'center',
+    fontFamily: 'monserat-bold'
+  },
+  text2: {
+    fontSize: 17,
+    color: '#FA7268',
+    textAlign: 'center',
+    fontFamily: 'monserat-bold'
+  },
+  ImageContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+
+  },
+  Imageborder: {
+    right: 85,
+    width: 80,
+    height: 80,
+    borderColor: '#151515',
+    borderWidth: 10,
+    borderRadius: 45,
+  },
+  Image: {
+    width: 60,
+    height: 60,
+
+    borderRadius: 30,
+  },
+  header: {
+
+    marginTop: 50,
+    marginBottom: 10,
+    alignItems: 'center',
+
   },
   welcomeContainer: {
     alignItems: 'center',
