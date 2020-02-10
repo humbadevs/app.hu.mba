@@ -89,6 +89,12 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+
+
+
+
+
+//Style
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -120,13 +126,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#FFF',
     textAlign: 'center',
-    fontFamily: 'monserat-bold'
+    fontFamily: 'monserrat-bold'
   },
   text2: {
     fontSize: 17,
     color: '#FA7268',
     textAlign: 'center',
-    fontFamily: 'monserat-bold'
+    fontFamily: 'monserrat-bold'
   },
   ImageContainer: {
     flex: 1,
