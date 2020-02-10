@@ -85,11 +85,11 @@ export default class ResetScreen extends React.Component {
             />
           </View>
           <View style={styles.buttonContainer}>
-<TouchableOpacity style={styles.button}  onPress={this._ErfolgasyncLi}>
-  <Text style={styles.buttonText}>
-    Registrieren
-  </Text>
-</TouchableOpacity>
+          <TouchableOpacity style={styles.button}  onPress={this._Erfolgasync}>
+          <Text style={styles.buttonText}>
+            Registrieren
+          </Text>
+          </TouchableOpacity>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -99,7 +99,7 @@ export default class ResetScreen extends React.Component {
 
   _Erfolgasync = async () => {
     if (this.state.email == this.state.emailConfirmation && this.state.password == this.state.passwordConfirmation && this.state.firstname !== '' && this.state.lastname !== '') {
-      fetch('http://10.254.1.72:4563/register', {
+      fetch('http://192.168.2.60:4563/register', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

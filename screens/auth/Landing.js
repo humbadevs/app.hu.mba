@@ -54,6 +54,13 @@ export default class LandingScreen extends React.Component {
   }
 
 }
+
+
+
+
+
+
+//Style
 const styles = StyleSheet.create({
   container: {
     flex: 1,

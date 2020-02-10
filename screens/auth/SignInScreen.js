@@ -20,19 +20,17 @@ export default class SignInScreen extends React.Component {
     //Loading in the data
     const email = await this.getRememberedEmail();
     const password = await this.getRememberedPassword();
-    const token = await this.getRememberedToken();
 
     this.setState({
       email: email || '',
       password: password || '',
-      token: token || ''
     });
 
     try {
       if (this.state.email !== '' && this.state.password !== '') {
 
         //Posting the login to the API
-        fetch('http://192.168.137.180:4563/login', {
+        fetch('http://192.168.2.60:4563/login', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -92,7 +90,7 @@ export default class SignInScreen extends React.Component {
           </View>
 
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={this._signInasync}>
+            <TouchableOpacity style={styles.button} onPress={this._signInAsync}>
               <Text style={styles.buttonText}> Login </Text>
             </TouchableOpacity>
           </View>
@@ -109,7 +107,7 @@ export default class SignInScreen extends React.Component {
     if (this.state.email !== '' && this.state.password !== '') {
 
       //Posting the login to the API
-      fetch('http://192.168.137.180:4563/login', {
+      fetch('http://192.168.2.60:4563/login', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -127,14 +125,7 @@ export default class SignInScreen extends React.Component {
           this.props.navigation.navigate('Main');
 
           let token = data.token;
-          this.setEmail();
-          this.setPassword();
-          return token;
-          /* needs bugfixing
-          this.setToken();
-          return token;
-          */
-          //debug console.log(token);
+          console.log(token);
         })
         .catch((error) => {
           console.log(error);
@@ -160,7 +151,7 @@ export default class SignInScreen extends React.Component {
       console.log(error);
     }
   };
-  /* needs bugfixing
+
   setToken = async() => {
 
     try {
@@ -169,7 +160,7 @@ export default class SignInScreen extends React.Component {
       console.log(error);
     }
   };
-  */
+
 
   //Retrieving the locally saved items
   getRememberedEmail = async () => {
@@ -191,19 +182,6 @@ export default class SignInScreen extends React.Component {
       const password = await AsyncStorage.getItem('password');
       if (password !== null) {
         return password;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
-  };
-
-  getRememberedToken = async () => {
-
-    try {
-      const token = await AsyncStorage.getItem('token');
-      if (token !== null) {
-        return token;
       }
     } catch (error) {
       console.log(error);

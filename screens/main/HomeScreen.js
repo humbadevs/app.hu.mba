@@ -28,13 +28,14 @@ export default class HomeScreen extends React.Component {
   };
   componentDidMount() {
     Font.loadAsync({
-      'monserat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
+      'monserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
     });
   }
   render() {
     //Array in das die Daten rein sollen
     //Die pic Links können api Links sein
-    const list = [{ key: 'Baum1', time: 'Noch 20 min', activity: 'Essen gehen', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Birnbaum_am_Lerchenberg_retouched.jpg/310px-Birnbaum_am_Lerchenberg_retouched.jpg' },
+    const list = [
+    { key: 'Baum1', time: 'Noch 20 min', activity: 'Essen gehen', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Birnbaum_am_Lerchenberg_retouched.jpg/310px-Birnbaum_am_Lerchenberg_retouched.jpg' },
     { key: 'Baum2', time: 'Noch 180 min', activity: 'Essen gehen', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ceiba_sp_branches.jpg/100px-Ceiba_sp_branches.jpg' },
     { key: 'Baum3', time: 'Noch 150 min', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ceiba_sp_branches.jpg/100px-Ceiba_sp_branches.jpg' },
     ];
