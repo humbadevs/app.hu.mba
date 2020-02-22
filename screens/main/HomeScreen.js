@@ -2,33 +2,31 @@
 import React from 'react';
 import {
   Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Button,
-  TextInput,
   Alert,
-  AsyncStorage,
-  SafeAreaView,
   FlatList,
+  Modal
+
 } from 'react-native';
 import * as Font from 'expo-font';
-
-
-
-import { MonoText } from '../../components/StyledText';
-import { render } from 'react-dom';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-  componentDidMount() {
+  state = {
+    modalVisible: false,
+  };
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+  async componentDidMount() {
     Font.loadAsync({
-      'monserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
+      'montserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
     });
   }
   render() {
@@ -39,6 +37,7 @@ export default class HomeScreen extends React.Component {
     { key: 'Baum2', time: 'Noch 180 min', activity: 'Essen gehen', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ceiba_sp_branches.jpg/100px-Ceiba_sp_branches.jpg' },
     { key: 'Baum3', time: 'Noch 150 min', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ceiba_sp_branches.jpg/100px-Ceiba_sp_branches.jpg' },
     ];
+
     return (
 
       <View style={styles.container}>
@@ -50,7 +49,7 @@ export default class HomeScreen extends React.Component {
         </View>
 
         {list.length > 0 ?
-          <FlatList data={list}
+          <FlatList inverted={false} data={list}
             renderItem={({ item }) => (
               <View style={styles.contentContainer}>
                 <View style={styles.textContainer}>
@@ -67,12 +66,17 @@ export default class HomeScreen extends React.Component {
                   }
                 </View>
                 <View style={styles.ImageContainer}>
-                  <View style={styles.Imageborder}>
+                  <View style={styles.Imageborder} >
+                    <TouchableOpacity onPress={() => {
+                      this.setModalVisible(true); 
+                    }}>
                     <Image style={styles.Image}
                       source={{ uri: item.pic }}
                     />
+                    </TouchableOpacity>
                   </View>
                 </View>
+
               </View>
 
             )} />
@@ -83,22 +87,77 @@ export default class HomeScreen extends React.Component {
                 </Text>
         }
 
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          <TouchableOpacity style={styles.space} onPress={() => {
+            this.setModalVisible(!this.state.modalVisible);
+          }}></TouchableOpacity>
+          <View style={styles.space} >
+            <TouchableOpacity style={styles.space} onPress={() => {
+              this.setModalVisible(!this.state.modalVisible);
+            }}></TouchableOpacity>
+            <View style={styles.kontaktContainer}>
+              <View style={styles.kontaktTextContainer}>
+          <Text style={styles.text1}></Text>
+                <Text style={styles.text2}>test</Text>
       </View>
+              <TouchableOpacity style={styles.Button}>
+                <Text style={styles.text1}>Kontakt anfragen</Text>
+              </TouchableOpacity>
+              <View style={styles.ImageContainer2}>
+                <View style={styles.Imageborder2} >
 
+                  <Image style={styles.Image2}
+                    source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ceiba_sp_branches.jpg/100px-Ceiba_sp_branches.jpg' }}
+                  />
+                </View>
+              </View>
+
+            </View>
+            <TouchableOpacity style={styles.space} onPress={() => {
+              this.setModalVisible(!this.state.modalVisible);
+            }}></TouchableOpacity>
+          </View>
+          <TouchableOpacity style={styles.space} onPress={() => {
+            this.setModalVisible(!this.state.modalVisible);
+          }}></TouchableOpacity>
+        </Modal>
+      </View>
     );
   }
 }
-
-
-
-
-
 
 //Style
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#151515',
+  },
+  space: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  kontaktContainer: {
+    flex: 10,
+    flexDirection: 'column',
+    backgroundColor: '#252525',
+    justifyContent: 'space-around',
+    alignItems: 'stretch',
+    borderColor: '#FA7268',
+    borderWidth: 2,
+    borderRadius: 15,
+
+  },
+  kontaktTextContainer: {
+    flex: 2.5,
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingTop: 10,
   },
   developmentModeText: {
     marginBottom: 20,
@@ -126,19 +185,37 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#FFF',
     textAlign: 'center',
-    fontFamily: 'monserrat-bold'
+    fontFamily: 'montserrat-bold'
   },
   text2: {
     fontSize: 17,
     color: '#FA7268',
     textAlign: 'center',
-    fontFamily: 'monserrat-bold'
+    fontFamily: 'montserrat-bold'
   },
   ImageContainer: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
 
+  },
+  ImageContainer2: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center'
+  },
+  Imageborder2: {
+    flexDirection: 'column',
+    right: 0,
+    width: 75,
+    height: 75,
+    borderRadius: 45,
+    backgroundColor: '#FA7268',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+    top: 37.5,
   },
   Imageborder: {
     right: 85,
@@ -147,13 +224,19 @@ const styles = StyleSheet.create({
     borderColor: '#151515',
     borderWidth: 10,
     borderRadius: 45,
+    backgroundColor: '#151515'
   },
   Image: {
     width: 60,
     height: 60,
-
     borderRadius: 30,
   },
+  Image2: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+  },
+
   header: {
 
     marginTop: 50,
@@ -161,76 +244,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
   },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+  Button: {
+    backgroundColor: '#FA7268',
+    borderRadius: 10,
+    marginRight: 5,
+    marginLeft: 5,
+    flex: 1,
+    justifyContent: 'center'
+  }
 });
