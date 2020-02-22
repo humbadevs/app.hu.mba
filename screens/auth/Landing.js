@@ -8,38 +8,43 @@ import {
   Text,
   Alert,
   ScrollView,
-  TouchableOpacity
-
+  TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import * as Font from 'expo-font';
 
 
 export default class LandingScreen extends React.Component {
-
+  componentDidMount() {
+    Font.loadAsync({
+      'monserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
+    });
+  }
   static navigationOptions = {
     header: null,
   };
   render() {
 
     return (
-      <SafeAreaView styles={styles.container}>
-        <ScrollView styles={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-
-
-          <View style={styles.welcome}>
-
-            <Text style={styles.textHeader}>Hallo!</Text>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.contentContainer}>
+          <View style={styles.welcome}></View>
+          <View style={styles.space}>
+            <View style={styles.space}></View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.button} onPress={this._Registerasync}>
+                <Text style={styles.buttonText}>Registrieren</Text>
+              </TouchableOpacity>
+              <View style={styles.space}></View>
+              <TouchableOpacity style={styles.button2} onPress={this._Loginasync}>
+                <Text style={styles.buttonText}>Ich bin bereits Nutzer</Text>
+              </TouchableOpacity>
+              <View style={styles.space}></View>
+            </View>
+            <View style={styles.space}></View>
           </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={this._Loginasync}>
-              <Text style={styles.buttonText}> Login </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={this._Registerasync}>
-              <Text style={styles.buttonText}> Register </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+
+        </View>
       </SafeAreaView>
     );
 
@@ -64,45 +69,50 @@ export default class LandingScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#151515',
+
     //backgroundColor: 'black'
 
   },
+  space: {
+    flex: 1,
+    flexDirection: 'row'
+  },
   contentContainer: {
-    paddingTop: 30,
-    backgroundColor: '#fff',
+    flex: 1,
+    flexDirection: 'column',
+
   },
   welcome: {
-    alignItems: 'center',
-    marginTop: 250,
-    marginBottom: 20,
+    flex: 5,
+    flexDirection: 'column-reverse'
   },
   buttonContainer: {
-    marginTop: 200,
-    alignItems: 'center',
-
-
-
+    flex: 7,
+    flexDirection: 'column',
 
   },
   button: {
-    borderRadius: 500,
+    flex: 4,
     backgroundColor: '#FA7268',
-    width: 300,
-    height: 40,
-    marginTop: 5,
-    borderColor: 'black',
-    borderWidth: 3,
-    alignItems: 'center',
-    
-    
-    
+    borderRadius: 10,
+    borderColor: 'white',
+    borderWidth:3,
+    justifyContent:'center'
+
+  },
+  button2: {
+    flex: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 10,
+    justifyContent:'center'
+
   },
   buttonText: {
-    
     color: 'white',
-    textAlignVertical: 'center',
-    marginTop: 5
-  
+    textAlign:'center',
+    fontFamily: 'monserrat-bold',
+    fontSize: 17,
   }
 
 });
