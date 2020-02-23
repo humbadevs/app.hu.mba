@@ -55,7 +55,7 @@ export default class LandingScreen extends React.Component {
   }
   _Registerasync = async () => {
 
-    this.props.navigation.navigate('Register');
+    this.props.navigation.navigate('Pre');
   }
 
 }
