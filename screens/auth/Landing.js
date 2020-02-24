@@ -9,9 +9,11 @@ import {
   Alert,
   ScrollView,
   TouchableOpacity,
+  ImageBackground
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import * as Font from 'expo-font';
+
 
 
 export default class LandingScreen extends React.Component {
@@ -27,6 +29,9 @@ export default class LandingScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
+        <ImageBackground source={require('../../assets/images/background.png')} style={{width: '100%', height: '100%'}}>
+          
+        
         <View style={styles.contentContainer}>
           <View style={styles.welcome}></View>
           <View style={styles.space}>
@@ -45,6 +50,7 @@ export default class LandingScreen extends React.Component {
           </View>
 
         </View>
+        </ImageBackground>
       </SafeAreaView>
     );
 

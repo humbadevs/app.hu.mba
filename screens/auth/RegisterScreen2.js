@@ -9,14 +9,15 @@ import {
   Alert,
   KeyboardAvoidingView,
   TouchableOpacity,
-  Linking
+  Linking,
+  Image
 
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import * as Font from 'expo-font';
 
 
-export default class RegisterScreen extends React.Component {
+export default class RegisterScreen2 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -51,31 +52,29 @@ export default class RegisterScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
+        
         <KeyboardAvoidingView style={styles.contentContainer} behavior="padding">
           <View style={styles.space}></View>
-          <View styles={styles.message}>
-            <Text style={styles.asdf}>Registrieren</Text>
+          <View style={{flex:1, alignItems:'center'}}>
+            <View style={styles.space}></View>
+            <Image source={require('../../assets/images/Letter.png')} style={styles.image}></Image>
           </View>
-          <View style={styles.space}></View>
+         
+          
           <View style={styles.InputContainer}>
 
             <View style={styles.space}>
               <View style={styles.space}></View>
               <View style={{ flex: 10 }}>
-                <Text style={styles.text}>Da humba vorerst nur für Schüler des Humboldt Gymnasiums Berlin-Tegel verfügbar ist, benötigen wir nur deine Schulemail, an welche wir eine Bestätigungsmail schicken werden.</Text>
-                
-                <TextInput style={styles.form}
-                  placeholder="vorname.nachname"
-                  onChangeText={(email) => this.setState({ email })}
-                />
-                <Text style={styles.text2}>@humboldtschule-berlin.eu</Text>
+                <Text style={styles.asdf}>Woah, so einfach.</Text>
+                <View style={styles.space}></View>
+                <Text style={styles.text}>Jetzt nur noch den <Text style={styles.text2}>Code</Text> aus deiner Bestätigungsmail <Text style={styles.text2}>unten eingeben</Text> und schon bist du schon dabei.</Text>
+                <View style={styles.space}></View>
+                <Text style={styles.text3}>Auch nach 5 Minuten keine Email an vorname.nachname@humboldtschule-berlin.eu bekommen? <Text style={styles.text4} onPress={this._resendAsync}>Dann klicke hier</Text>. Falls dies auch nicht geholfen hat schreibe uns bitte an: <Text style={styles.text4} onPress={() => Linking.openURL('mailto:support@hu.mba')}>support@hu.mba</Text>.</Text>
               </View>
 
               <View style={styles.space}></View>
             </View>
-            <View style={styles.space}></View>
-
-           
 
           </View>
 
@@ -83,14 +82,24 @@ export default class RegisterScreen extends React.Component {
             <View style={styles.space}></View>
             <View style={styles.space}>
               <View style={styles.space}></View>
-              <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register2')}>
-                <Text style={styles.buttonText}> Registrieren </Text>
+              <TextInput style={styles.form}
+                placeholder="XXXXXX"
+                onChangeText={(email) => this.setState({email})} //benötigt fixing
+              />
+              <View style={styles.space}></View>
+            </View>
+
+
+
+            <View style={styles.space}>
+              <View style={styles.space}></View>
+
+              <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Register3')}>
+                <Text style={styles.buttonText}> Bestätigen </Text>
               </TouchableOpacity>
               <View style={styles.space}></View>
             </View>
-            <View style={{flex:1, flexDirection:'column'}}>
-              <Text style={styles.text3}>Mit Absenden deiner Daten erklärst du dich einverstanden mit unseren <Text style={styles.text4} onPress={()=> Linking.openURL('https://www.notion.so/Privacy-b94679c757fb4ddba98be32908a8a412')}>Datenschutzrichtlinien</Text> und den <Text style={styles.text4} onPress={()=> Linking.openURL('https://www.google.com')}>Nutzungsbedinungen</Text> .</Text>
-            </View>
+            <View style={styles.space}></View>
           </View>
         </KeyboardAvoidingView>
 
@@ -98,7 +107,10 @@ export default class RegisterScreen extends React.Component {
 
     );
   }
+  _resendAsync = async () => {
+    //Zu implementieren
 
+  }
   _Erfolgasync = async () => {
     if (this.state.email == this.state.emailConfirmation && this.state.password == this.state.passwordConfirmation && this.state.firstname !== '' && this.state.lastname !== '') {
       fetch('http://192.168.2.60:4563/register', {
@@ -137,7 +149,7 @@ const styles = StyleSheet.create({
   space: {
     flex: 1,
     flexDirection: 'row',
-   
+
   },
   contentContainer: {
     flex: 1,
@@ -146,21 +158,22 @@ const styles = StyleSheet.create({
   },
   message: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor:'red'
   },
   InputContainer: {
     alignItems: 'flex-start',
     flex: 1,
   },
   buttonContainer: {
-    flex: 1,
+    flex: 1.5,
   },
   button: {
     flex: 5,
     backgroundColor: '#FA7268',
     justifyContent: 'center',
     alignItems: 'center',
-    
+    marginTop: 10,
     borderRadius: 10
   },
   buttonText: {
@@ -169,49 +182,51 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   form: {
-    borderRadius:10,
+    borderRadius: 10,
     borderBottomColor: 'rgba(255, 255, 255, 0.8)',
     fontFamily: 'monserrat-bold',
-    fontSize: 10,
-    backgroundColor:'white',
-    padding:4,
-    marginTop:5
+    fontSize: 20,
+    backgroundColor: 'white',
+    padding: 4,
+    marginTop: 5,
+    flex: 5,
+    textAlign: 'center',
+    marginBottom: 10
 
   },
   asdf: {
     textAlign: "center",
-    color: '#FFF',
+    color: '#FA7268',
     fontFamily: 'monserrat-bold',
-    fontSize: 40
+    fontSize: 30
   },
   text: {
     fontFamily: 'monserrat-bold',
-    color: 'white',
-    fontSize:10,
-    marginBottom: 10
+    color: 'rgba(250, 114, 104, 0.5);',
+    fontSize: 15,
+    marginBottom: 10,
+    textAlign: 'center'
   },
 
-text2: {
-    fontFamily: 'monserrat-bold',
-    color: 'white',
-    fontSize:10,
-    textAlign:'center',
-    marginTop:10
+  text2: {
+    color: '#FA7268'
   },
   text3: {
-    fontFamily: 'monserrat',
-    color: 'white',
-    fontSize:8,
-    textAlign:'center',
-    marginTop:10,
+    fontFamily: 'monserrat-bold',
+    color: 'rgba(250, 114, 104, 0.5);',
+    fontSize: 8,
+    textAlign: 'center',
+
   },
   text4: {
-    fontFamily: 'monserrat',
-    color: 'white',
-    fontSize:8,
-    textAlign:'center',
-    marginTop:10,
-    textDecorationLine:'underline'
+
+    textDecorationLine: 'underline'
   },
+  image: {
+    flex: 10,
+    resizeMode: 'contain',
+    height: 100,
+    width: 100
+},
 });
 

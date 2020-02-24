@@ -31,13 +31,17 @@ export default class Preregister extends React.Component {
                             <View style={styles.space}></View>
                             <Image source={require('../../assets/images/Group1(1).png')} style={styles.image}></Image>
                             <View style={styles.space}></View>
-                            <Text style={styles.text3}>humba.</Text>
+                            <Text><Text style={styles.text3}>humba.</Text></Text>
                             <View style={styles.space}></View>
 
                         </View>
                         <View style={styles.space}>
+
                             <View style={styles.space}></View>
-                            <Text style={styles.text2}>Deine freie Zeit ist wertvoll. Nutze sie.</Text>
+
+                            <Text style={{flex:10}}><Text style={styles.text2}>Deine freie Zeit ist wertvoll. Nutze sie. </Text></Text>
+
+
                             <View style={styles.space}></View>
                         </View>
                         <View style={styles.space}>
@@ -136,13 +140,14 @@ const styles = StyleSheet.create({
         flex: 10,
         color: 'white',
         fontFamily: 'monserrat-bold',
-        fontSize:12
+        fontSize: 12
     },
     text2: {
         flex: 10,
         color: 'white',
         fontFamily: 'monserrat-bold',
-        fontSize: 35
+        fontSize: 25
+
     },
     text3: {
         flex: 10,

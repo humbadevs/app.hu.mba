@@ -91,11 +91,11 @@ export default class SignInScreen extends React.Component {
               <View style={{ flex: 10 }}>
                 <Text style={styles.text}>Email</Text>
                 <TextInput style={styles.form}
-                placeholder="vorname.nachname@humboldtschule-berlin.eu"
-                onChangeText={(email) => this.setState({ email })}
-              />
+                  placeholder="vorname.nachname@humboldtschule-berlin.eu"
+                  onChangeText={(email) => this.setState({ email })}
+                />
               </View>
-             
+
               <View style={styles.space}></View>
             </View>
             <View style={styles.space}></View>
@@ -270,10 +270,10 @@ const styles = StyleSheet.create({
     borderColor: '#151515',
     borderBottomColor: 'rgba(255, 255, 255, 0.8)',
     borderWidth: 2,
-   
+    color:'white',
     fontFamily: 'monserrat-bold',
-    fontSize:10,
-    
+    fontSize: 10,
+
   },
   asdf: {
     textAlign: "center",
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'monserrat-bold',
-color:'white'
+    color: 'white'
   },
 
 });
