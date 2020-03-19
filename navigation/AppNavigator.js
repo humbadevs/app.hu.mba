@@ -10,6 +10,12 @@ import ErfolgScreen from '../screens/auth/ErfolgScreen';
 import LandingScreen from '../screens/auth/Landing';
 
 import ResetScreen from '../screens/main/ResetScreen';
+import Preregister from '../screens/auth/Preregister';
+import RegisterScreen2 from '../screens/auth/RegisterScreen2';
+import RegisterScreen3 from '../screens/auth/RegisterScreen3';
+
+
+const AuthStack = createStackNavigator({ Landing: LandingScreen, SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen, Pre: Preregister, Register2: RegisterScreen2, Register3: RegisterScreen3});
 
 const AuthStack = createStackNavigator({ Landing: LandingScreen, SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen, Reset: ResetScreen }); // if you wanna use navigation -> put your code here!
 																																							  // uniqueName : file

@@ -79,6 +79,7 @@ export default class SettingsScreen extends React.Component{
    }
 
 
+
 }
 
 SettingsScreen.navigationOptions = {

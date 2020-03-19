@@ -10,14 +10,13 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Linking
-} from 'react-native';
 
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+} from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import * as Font from 'expo-font';
 
 
-export default class RegisterScreen extends React.Component {
+export default class RegisterScreen3 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -29,9 +28,6 @@ export default class RegisterScreen extends React.Component {
       password: '',
       passwordConfirmation: '',
     };
-  }
-  static navigationOptions = {
-    title: 'Registrieren',
   }
   componentDidMount() {
     Font.loadAsync({
@@ -58,7 +54,7 @@ export default class RegisterScreen extends React.Component {
         <KeyboardAvoidingView style={styles.contentContainer} behavior="padding">
           <View style={styles.space}></View>
           <View styles={styles.message}>
-            <Text style={styles.asdf}>Registrieren</Text>
+            <Text style={styles.asdf}>Passwort</Text>
           </View>
           <View style={styles.space}></View>
           <View style={styles.InputContainer}>
@@ -66,13 +62,17 @@ export default class RegisterScreen extends React.Component {
             <View style={styles.space}>
               <View style={styles.space}></View>
               <View style={{ flex: 10 }}>
-                <Text style={styles.text}>Da humba vorerst nur für Schüler des Humboldt Gymnasiums Berlin-Tegel verfügbar ist, benötigen wir nur deine Schulemail, an welche wir eine Bestätigungsmail schicken werden.</Text>
+                <Text style={styles.text}>Jetzt nur noch ein sicheres Passwort setzten, welches du dir idealerweise auch merken kannst und schon geht es los mit einer viel spannenderen Pause.</Text>
                 
                 <TextInput style={styles.form}
-                  placeholder="vorname.nachname"
+                  placeholder="Passwort mit 8-16 Zeichen"
                   onChangeText={(email) => this.setState({ email })}
                 />
-                <Text style={styles.text2}>@humboldtschule-berlin.eu</Text>
+                 <TextInput style={styles.form}
+                  placeholder="Passwort wiederhohlen"
+                  onChangeText={(email) => this.setState({ email })}
+                />
+                
               </View>
 
               <View style={styles.space}></View>
@@ -88,7 +88,7 @@ export default class RegisterScreen extends React.Component {
             <View style={styles.space}>
               <View style={styles.space}></View>
               <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register2')}>
-                <Text style={styles.buttonText}> Registrieren </Text>
+                <Text style={styles.buttonText}>Habe es mir gemerkt!</Text>
               </TouchableOpacity>
               <View style={styles.space}></View>
             </View>
@@ -97,6 +97,7 @@ export default class RegisterScreen extends React.Component {
             </View>
           </View>
         </KeyboardAvoidingView>
+
       </SafeAreaView>
 
     );
@@ -128,6 +129,8 @@ export default class RegisterScreen extends React.Component {
   */
 
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -215,3 +218,4 @@ text2: {
     textDecorationLine:'underline'
   },
 });
+
