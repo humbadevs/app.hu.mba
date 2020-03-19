@@ -32,7 +32,7 @@ export default class SettingsScreen extends React.Component{
           </View>
           
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={this._resetmepls}>
+            <TouchableOpacity style={styles.button} onPress={''}>
               <Text style={styles.buttonText}> Passwort erneuern? </Text>
             </TouchableOpacity>
           </View>
@@ -74,9 +74,6 @@ export default class SettingsScreen extends React.Component{
      this.props.navigation.navigate('Auth');
    };
 
-   _resetmepls = async () => { // to the ResetScreen!
-     this.props.navigation.navigate('Reset');
-   }
 
 
 

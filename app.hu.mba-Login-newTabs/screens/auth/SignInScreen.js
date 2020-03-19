@@ -8,20 +8,12 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  KeyboardAvoidingView
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default class SignInScreen extends React.Component {
-  componentDidMount() {
-    Font.loadAsync({
-      'monserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
-    });
-  }
-  static navigationOptions = {
-    header: null,
-  };
+
   //componentDidMount updates states
   async componentDidMount() {
 
@@ -29,6 +21,7 @@ export default class SignInScreen extends React.Component {
     const email = await this.getRememberedEmail();
     const password = await this.getRememberedPassword();
     const token = await this.getRememberedToken();
+
     this.setState({
       email: email || '',
       password: password || '',
@@ -70,64 +63,41 @@ export default class SignInScreen extends React.Component {
     };
   }
 
+
   static navigationOptions = {
     title: 'Sign In',
   };
+
 
   render() {
 
     return (
 
       <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView style={styles.contentContainer} behavior="padding">
-          <View style={styles.space}></View>
-          <View styles={styles.message}>
-            <Text style={styles.asdf}>Login</Text>
+        <ScrollView style={styles.contentContainer}>
+          <View styles={styles.welcome}>
+            <Text style={styles.asdf}>Welcome to Humba!</Text>
+            <Text style={styles.asdf}>Login with Iserv:</Text>
           </View>
-          <View style={styles.space}></View>
           <View style={styles.InputContainer}>
+            <TextInput style={styles.form}
+              placeholder="E-mail"
+              onChangeText={(email) => this.setState({ email })}
+            />
 
-            <View style={styles.space}>
-              <View style={styles.space}></View>
-              <View style={{ flex: 10 }}>
-                <Text style={styles.text}>Email</Text>
-                <TextInput style={styles.form}
-                  placeholder="vorname.nachname@humboldtschule-berlin.eu"
-                  onChangeText={(email) => this.setState({ email })}
-                />
-              </View>
-
-              <View style={styles.space}></View>
-            </View>
-            <View style={styles.space}></View>
-
-            <View style={styles.space}>
-              <View style={styles.space}></View>
-              <View style={{ flex: 10 }}>
-                <Text style={styles.text}>Passwort</Text>
-                <TextInput style={styles.form}
-                  placeholder="8 - 16 Zeichen"
-                  onChangeText={(password) => this.setState({ password })}
-                  secureTextEntry={true}
-                /></View>
-
-              <View style={styles.space}></View>
-            </View>
-
+            <TextInput style={styles.form}
+              placeholder="Password"
+              onChangeText={(password) => this.setState({ password })}
+            />
           </View>
 
           <View style={styles.buttonContainer}>
-            <View style={styles.space}></View>
-            <View style={styles.space}>
-              <View style={styles.space}></View>
-              <TouchableOpacity style={styles.button} onPress={this._signInAsync}>
-                <Text style={styles.buttonText}> Login </Text>
-              </TouchableOpacity>
-              <View style={styles.space}></View>
-            </View>
-            <View style={styles.space}></View>
+            <TouchableOpacity style={styles.button} onPress={this._signInasync}>
+              <Text style={styles.buttonText}> Login </Text>
+            </TouchableOpacity>
           </View>
-        </KeyboardAvoidingView>
+        </ScrollView>
+
       </SafeAreaView>
     );
   }
@@ -190,10 +160,8 @@ export default class SignInScreen extends React.Component {
       console.log(error);
     }
   };
-
   /* needs bugfixing
-
-  setToken = async () => {
+  setToken = async() => {
 
     try {
       await AsyncStorage.setItem('token', this.token);
@@ -230,7 +198,6 @@ export default class SignInScreen extends React.Component {
 
   };
 
-
   getRememberedToken = async () => {
 
     try {
@@ -243,6 +210,7 @@ export default class SignInScreen extends React.Component {
     }
 
   };
+
 }
 
 
@@ -252,59 +220,47 @@ export default class SignInScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#151515',
-
-  },
-  space: {
-    flex: 1,
-    flexDirection: 'row',
+    backgroundColor: '#fff',
 
   },
   contentContainer: {
-    flex: 1,
-    flexDirection: 'column',
-
+    paddingTop: 30,
   },
-  message: {
-    flex: 1,
-    flexDirection: 'column'
+  welcome: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
   },
   InputContainer: {
-    alignItems: 'flex-start',
-    flex: 1,
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+
+
   },
   buttonContainer: {
-    flex: 1,
+    marginTop: 200,
+    alignItems: 'center',
+
+
+
   },
   button: {
-    backgroundColor: '#FA7268',
-    justifyContent: 'center',
+    borderRadius: 500,
+    backgroundColor: 'black',
+    width: 300,
+    height: 40,
     alignItems: 'center',
-    flex: 5,
-    borderRadius: 10
+    marginTop: 5
   },
   buttonText: {
-    color: 'white',
-    fontFamily: 'monserrat-bold',
-    fontSize: 17,
-  },
-  form: {
-    borderColor: '#151515',
-    borderBottomColor: 'rgba(255, 255, 255, 0.8)',
-    borderWidth: 2,
-    color:'white',
-    fontFamily: 'monserrat-bold',
-    fontSize: 10,
+    color: 'white'
+
 
   },
   asdf: {
     textAlign: "center",
-    color: '#FFF',
-    fontFamily: 'monserrat-bold',
-    fontSize: 40
-  },
-  text: {
-    fontFamily: 'monserrat-bold',
-    color: 'white'
-  },
+
+  }
+
 });

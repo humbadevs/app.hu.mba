@@ -6,7 +6,6 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/main/HomeScreen';
 import NewScreen from '../screens/main/NewScreen';
-
 import LinksScreen from '../screens/main/LinksScreen';
 import SettingsScreen from '../screens/main/SettingsScreen';
 

@@ -8,6 +8,12 @@ import {
   Text,
   Alert,
   ScrollView,
+  TouchableOpacity
+} from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+
+
+export default class LandingScreen extends React.Component {
   TouchableOpacity,
   ImageBackground
 } from 'react-native';
@@ -60,7 +66,6 @@ export default class LandingScreen extends React.Component {
     this.props.navigation.navigate('SignIn');
   }
   _Registerasync = async () => {
-
     this.props.navigation.navigate('Pre');
   }
 

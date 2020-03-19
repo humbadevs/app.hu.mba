@@ -10,8 +10,9 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Linking
-
 } from 'react-native';
+
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-navigation';
 import * as Font from 'expo-font';
 
@@ -28,6 +29,9 @@ export default class RegisterScreen extends React.Component {
       password: '',
       passwordConfirmation: '',
     };
+  }
+  static navigationOptions = {
+    title: 'Registrieren',
   }
   componentDidMount() {
     Font.loadAsync({
@@ -93,7 +97,6 @@ export default class RegisterScreen extends React.Component {
             </View>
           </View>
         </KeyboardAvoidingView>
-
       </SafeAreaView>
 
     );
@@ -125,8 +128,6 @@ export default class RegisterScreen extends React.Component {
   */
 
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -214,4 +215,3 @@ text2: {
     textDecorationLine:'underline'
   },
 });
-
