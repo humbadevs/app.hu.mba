@@ -6,10 +6,14 @@ import MainTabNavigator from './MainTabNavigator';
 import SignInScreen from '../screens/auth/SignInScreen';
 import AuthLoadingScreen from '../screens/auth/AuthLoadingScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
-import ErfolgScreen from '../screens/auth/ErfolgScreen'
-import LandingScreen from '../screens/auth/Landing'
+import ErfolgScreen from '../screens/auth/ErfolgScreen';
+import LandingScreen from '../screens/auth/Landing';
+import Preregister from '../screens/auth/Preregister';
+import RegisterScreen2 from '../screens/auth/RegisterScreen2';
+import RegisterScreen3 from '../screens/auth/RegisterScreen3';
 
-const AuthStack = createStackNavigator({ Landing: LandingScreen, SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen });
+
+const AuthStack = createStackNavigator({ Landing: LandingScreen, SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen, Pre: Preregister, Register2: RegisterScreen2, Register3: RegisterScreen3});
 
 export default createAppContainer(
   createSwitchNavigator({
