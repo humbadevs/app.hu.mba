@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    TouchableOpacity,
-    Image
-} from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import * as Font from 'expo-font';
 import Space from '../../components/Space';
 
 
@@ -29,15 +22,10 @@ export default class Preregister extends React.Component {
                             <Space/>
                             <Text><Text style={styles.text3}>humba.</Text></Text>
                             <Space/>
-
                         </View>
                         <View style={styles.space}>
-
                             <Space/>
-
                             <Text style={{flex:10}}><Text style={styles.text2}>Deine freie Zeit ist wertvoll. Nutze sie. </Text></Text>
-
-
                             <Space/>
                         </View>
                         <View style={styles.space}>

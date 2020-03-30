@@ -1,16 +1,5 @@
 import React from 'react';
-import {
-  AsyncStorage,
-  StyleSheet,
-  View,
-  Button,
-  TextInput,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  KeyboardAvoidingView
-} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { AsyncStorage, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Space from '../../components/Space';
 
 
@@ -23,6 +12,7 @@ export default class SignInScreen extends React.Component {
   async componentDidMount() {
 
     //Loading in the data
+    //bitte in AuthLoading implementieren, nicht hier
     const email = await this.getRememberedEmail();
     const password = await this.getRememberedPassword();
     const token = await this.getRememberedToken();
@@ -238,7 +228,6 @@ export default class SignInScreen extends React.Component {
 
   };
 }
-
 
 
 //Stylesheet

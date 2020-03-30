@@ -1,48 +1,16 @@
 import * as React from 'react';
-import {
-  AsyncStorage,
-  StyleSheet,
-  View,
-  Button,
-  TextInput,
-  Text,
-  Alert,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  Linking
-
-} from 'react-native';
+import { KeyboardAvoidingView, Linking, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import * as Font from 'expo-font';
 import Space from '../../components/Space';
 
 
 
 export default class RegisterScreen3 extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      emailConfirmation: '',
-      firstname: '',
-      lastname: '',
-      password: '',
-      passwordConfirmation: '',
-    };
-  }
   
   static navigationOptions = {
     header: null,
   };
-
-  /* tbd
-  async componentDidMount(){
-
-  }
-  */
-
-
 
   render() {
 
@@ -99,31 +67,6 @@ export default class RegisterScreen3 extends React.Component {
 
     );
   }
-
-  _Erfolgasync = async () => {
-    if (this.state.email == this.state.emailConfirmation && this.state.password == this.state.passwordConfirmation && this.state.firstname !== '' && this.state.lastname !== '') {
-      fetch('http://192.168.2.60:4563/register', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          password: this.state.password,
-        }),
-      })
-      this.props.navigation.navigate('Erfolg');
-    }
-  }
-  /* tbd
-  _signInAsync = async() => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('Main');
-  };
-  */
 
 }
 

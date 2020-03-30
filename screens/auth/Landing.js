@@ -1,18 +1,6 @@
 import React from 'react';
-import {
-  AsyncStorage,
-  StyleSheet,
-  View,
-  Button,
-  TextInput,
-  Text,
-  Alert,
-  ScrollView,
-  TouchableOpacity,
-  ImageBackground
-} from 'react-native';
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import * as Font from 'expo-font';
 import Space from '../../components/Space';
 
 export default class LandingScreen extends React.Component {

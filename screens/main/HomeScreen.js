@@ -1,19 +1,6 @@
 //import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Alert,
-  FlatList,
-  Modal
-
-} from 'react-native';
-import * as Font from 'expo-font';
+import { Alert, FlatList, Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
