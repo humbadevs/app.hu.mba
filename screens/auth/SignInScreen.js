@@ -11,14 +11,11 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import Space from '../../components/Space';
 
 
 export default class SignInScreen extends React.Component {
-  componentDidMount() {
-    Font.loadAsync({
-      'monserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
-    });
-  }
+  
   static navigationOptions = {
     header: null,
   };
@@ -70,9 +67,6 @@ export default class SignInScreen extends React.Component {
     };
   }
 
-  static navigationOptions = {
-    title: 'Sign In',
-  };
 
   render() {
 
@@ -80,15 +74,15 @@ export default class SignInScreen extends React.Component {
 
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingView style={styles.contentContainer} behavior="padding">
-          <View style={styles.space}></View>
+          <Space/>
           <View styles={styles.message}>
             <Text style={styles.asdf}>Login</Text>
           </View>
-          <View style={styles.space}></View>
+          <Space/>
           <View style={styles.InputContainer}>
 
             <View style={styles.space}>
-              <View style={styles.space}></View>
+              <Space/>
               <View style={{ flex: 10 }}>
                 <Text style={styles.text}>Email</Text>
                 <TextInput style={styles.form}
@@ -97,12 +91,12 @@ export default class SignInScreen extends React.Component {
                 />
               </View>
 
-              <View style={styles.space}></View>
+              <Space/>
             </View>
-            <View style={styles.space}></View>
+            <Space/>
 
             <View style={styles.space}>
-              <View style={styles.space}></View>
+              <Space/>
               <View style={{ flex: 10 }}>
                 <Text style={styles.text}>Passwort</Text>
                 <TextInput style={styles.form}
@@ -111,21 +105,21 @@ export default class SignInScreen extends React.Component {
                   secureTextEntry={true}
                 /></View>
 
-              <View style={styles.space}></View>
+              <Space/>
             </View>
 
           </View>
 
           <View style={styles.buttonContainer}>
-            <View style={styles.space}></View>
+            <Space/>
             <View style={styles.space}>
-              <View style={styles.space}></View>
+              <Space/>
               <TouchableOpacity style={styles.button} onPress={this._signInAsync}>
                 <Text style={styles.buttonText}> Login </Text>
               </TouchableOpacity>
-              <View style={styles.space}></View>
+              <Space/>
             </View>
-            <View style={styles.space}></View>
+            <Space/>
           </View>
         </KeyboardAvoidingView>
       </SafeAreaView>

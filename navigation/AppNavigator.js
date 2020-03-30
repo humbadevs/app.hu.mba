@@ -16,10 +16,9 @@ import RegisterScreen3 from '../screens/auth/RegisterScreen3';
 
 
 const AuthStack = createStackNavigator({ Landing: LandingScreen, SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen, Pre: Preregister, Register2: RegisterScreen2, Register3: RegisterScreen3});
-
-const AuthStack = createStackNavigator({ Landing: LandingScreen, SignIn: SignInScreen, Register: RegisterScreen, Erfolg: ErfolgScreen, Reset: ResetScreen }); // if you wanna use navigation -> put your code here!
-																																							  // uniqueName : file
-																																							  // refer to 'uniqueName' for the navigation!
+// if you wanna use navigation -> put your code here!
+// uniqueName : file
+// refer to 'uniqueName' for the navigation!
 export default createAppContainer(
   createSwitchNavigator({
     // You could add another route here for authentication.
@@ -30,7 +29,7 @@ export default createAppContainer(
     
   },
   {
-       initialRouteName: 'Main', // usually at Auth
+       initialRouteName: 'AuthLoading', // usually at AuthLoading
      }
    )
 );

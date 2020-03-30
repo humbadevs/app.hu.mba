@@ -26,11 +26,6 @@ export default class HomeScreen extends React.Component {
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
-  async componentDidMount() {
-    Font.loadAsync({
-      'montserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
-    });
-  }
   render() {
     //Array in das die Daten rein sollen
     //Die pic Links können api Links sein

@@ -8,26 +8,14 @@ import {
   Text,
   Alert,
   ScrollView,
-  TouchableOpacity
-} from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-
-
-export default class LandingScreen extends React.Component {
   TouchableOpacity,
   ImageBackground
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import * as Font from 'expo-font';
-
-
+import Space from '../../components/Space';
 
 export default class LandingScreen extends React.Component {
-  componentDidMount() {
-    Font.loadAsync({
-      'monserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
-    });
-  }
   static navigationOptions = {
     header: null,
   };
@@ -41,18 +29,18 @@ export default class LandingScreen extends React.Component {
         <View style={styles.contentContainer}>
           <View style={styles.welcome}></View>
           <View style={styles.space}>
-            <View style={styles.space}></View>
+            <Space/>
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.button} onPress={this._Registerasync}>
                 <Text style={styles.buttonText}>Registrieren</Text>
               </TouchableOpacity>
-              <View style={styles.space}></View>
+              <Space/>
               <TouchableOpacity style={styles.button2} onPress={this._Loginasync}>
                 <Text style={styles.buttonText}>Ich bin bereits Nutzer</Text>
               </TouchableOpacity>
-              <View style={styles.space}></View>
+              <Space/>
             </View>
-            <View style={styles.space}></View>
+            <Space/>
           </View>
 
         </View>
@@ -81,9 +69,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#151515',
-
-    //backgroundColor: 'black'
-
   },
   space: {
     flex: 1,

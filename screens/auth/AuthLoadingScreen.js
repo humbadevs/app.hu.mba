@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 
+
 export default class AuthLoadingScreen extends React.Component {
   componentDidMount() {
     this._bootstrapAsync();

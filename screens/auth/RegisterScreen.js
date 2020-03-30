@@ -12,9 +12,9 @@ import {
   Linking
 } from 'react-native';
 
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-navigation';
 import * as Font from 'expo-font';
+import Space from '../../components/Space';
 
 
 export default class RegisterScreen extends React.Component {
@@ -33,38 +33,25 @@ export default class RegisterScreen extends React.Component {
   static navigationOptions = {
     title: 'Registrieren',
   }
-  componentDidMount() {
-    Font.loadAsync({
-      'monserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
-      'monserrat': require('../../assets/fonts/Montserrat-Regular.ttf'),
-    });
-  }
+  
   static navigationOptions = {
     header: null,
   };
-
-  /* tbd
-  async componentDidMount(){
-
-  }
-  */
-
-
 
   render() {
 
     return (
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingView style={styles.contentContainer} behavior="padding">
-          <View style={styles.space}></View>
+          <Space/>
           <View styles={styles.message}>
             <Text style={styles.asdf}>Registrieren</Text>
           </View>
-          <View style={styles.space}></View>
+          <Space/>
           <View style={styles.InputContainer}>
 
             <View style={styles.space}>
-              <View style={styles.space}></View>
+              <Space/>
               <View style={{ flex: 10 }}>
                 <Text style={styles.text}>Da humba vorerst nur für Schüler des Humboldt Gymnasiums Berlin-Tegel verfügbar ist, benötigen wir nur deine Schulemail, an welche wir eine Bestätigungsmail schicken werden.</Text>
                 
@@ -75,22 +62,22 @@ export default class RegisterScreen extends React.Component {
                 <Text style={styles.text2}>@humboldtschule-berlin.eu</Text>
               </View>
 
-              <View style={styles.space}></View>
+              <Space/>
             </View>
-            <View style={styles.space}></View>
+            <Space/>
 
            
 
           </View>
 
           <View style={styles.buttonContainer}>
-            <View style={styles.space}></View>
+            <Space/>
             <View style={styles.space}>
-              <View style={styles.space}></View>
+              <Space/>
               <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register2')}>
                 <Text style={styles.buttonText}> Registrieren </Text>
               </TouchableOpacity>
-              <View style={styles.space}></View>
+              <Space/>
             </View>
             <View style={{flex:1, flexDirection:'column'}}>
               <Text style={styles.text3}>Mit Absenden deiner Daten erklärst du dich einverstanden mit unseren <Text style={styles.text4} onPress={()=> Linking.openURL('https://www.notion.so/Privacy-b94679c757fb4ddba98be32908a8a412')}>Datenschutzrichtlinien</Text> und den <Text style={styles.text4} onPress={()=> Linking.openURL('https://www.google.com')}>Nutzungsbedinungen</Text> .</Text>
@@ -120,13 +107,6 @@ export default class RegisterScreen extends React.Component {
       this.props.navigation.navigate('Erfolg');
     }
   }
-  /* tbd
-  _signInAsync = async() => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('Main');
-  };
-  */
-
 }
 
 const styles = StyleSheet.create({
