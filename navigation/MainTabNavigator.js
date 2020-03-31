@@ -5,10 +5,11 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/main/HomeScreen';
-import NewScreen from '../screens/main/NewScreen';
 
 import LinksScreen from '../screens/main/LinksScreen';
 import SettingsScreen from '../screens/main/SettingsScreen';
+
+import ProfileScreen from '../screens/main/ProfileScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -37,29 +38,6 @@ HomeStack.navigationOptions = {
 };
 
 HomeStack.path = '';
-
-const NewStack = createStackNavigator( //your Code goes here!
-  {
-    New: NewScreen,
-  },
-  config
-);
-
-NewStack.navigationOptions = { //was unten in der Leiste steht
-  tabBarLabel: 'New',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
-
-NewStack.path = ''; //auch nicht vergessen!
 
 const LinksStack = createStackNavigator(
   {
@@ -93,11 +71,30 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+const ProfileStack = createStackNavigator( //your Code goes here!
+  {
+    Profile: ProfileScreen,
+  },
+  config
+);
+
+ProfileStack.navigationOptions = { //was unten in der Leiste steht!
+  tabBarLabel: ' ', // muss gefixt werden!
+  tabBarIcon: ({ focused }) => (
+            <Image
+              style={styles.tabbaricon} 
+              source={require('../screens/main/2020_03_27_17_10_17_Einstellungen.jpg')} // tada!
+            />
+  ),
+};
+
+ProfileStack.path = ''; //auch nicht vergessen!
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  NewStack,
   LinksStack,
   SettingsStack,
+  ProfileStack,
 }); //hier auch hinzufügen
 
 tabNavigator.path = '';
