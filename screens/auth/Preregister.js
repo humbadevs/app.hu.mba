@@ -1,22 +1,11 @@
 import React from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    TouchableOpacity,
-    Image
-} from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import * as Font from 'expo-font';
+import Space from '../../components/Space';
+
 
 
 export default class Preregister extends React.Component {
-    componentDidMount() {
-        Font.loadAsync({
-            'monserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
-            'monserrat': require('../../assets/fonts/Montserrat-Regular.ttf'),
-        });
-    }
     static navigationOptions = {
         header: null,
     };
@@ -26,41 +15,36 @@ export default class Preregister extends React.Component {
             <SafeAreaView style={styles.container}>
                 <View style={styles.contentContainer}>
                     <View style={styles.welcome}>
-                        <View style={styles.space}></View>
+                        <Space/>
                         <View style={styles.space}>
-                            <View style={styles.space}></View>
+                            <Space/>
                             <Image source={require('../../assets/images/Group1(1).png')} style={styles.image}></Image>
-                            <View style={styles.space}></View>
+                            <Space/>
                             <Text><Text style={styles.text3}>humba.</Text></Text>
-                            <View style={styles.space}></View>
-
+                            <Space/>
                         </View>
                         <View style={styles.space}>
-
-                            <View style={styles.space}></View>
-
+                            <Space/>
                             <Text style={{flex:10}}><Text style={styles.text2}>Deine freie Zeit ist wertvoll. Nutze sie. </Text></Text>
-
-
-                            <View style={styles.space}></View>
+                            <Space/>
                         </View>
                         <View style={styles.space}>
-                            <View style={styles.space}></View>
+                            <Space/>
                             <Text style={styles.text}>humba ist die App mit der du deine Freistunde oder Pause endlich sinnvoller verbringen kannst. Suche einfach Andere, die auch frei haben, lerne neue Menschen kennen, lass dir von uns Aktivitäten vorschlagen oder gehe günstiger bei unseren Partnern essen.</Text>
-                            <View style={styles.space}></View>
+                            <Space/>
                         </View>
                     </View>
                     <View style={styles.space}>
-                        <View style={styles.space}></View>
+                        <Space/>
                         <View style={styles.buttonContainer}>
-                            <View style={styles.space}></View>
+                            <Space/>
                             <TouchableOpacity style={styles.button} onPress={this._Registerasync}>
                                 <Text style={styles.buttonText}>Ich möchte das!</Text>
                             </TouchableOpacity>
-                            <View style={styles.space}></View>
+                            <Space/>
 
                         </View>
-                        <View style={styles.space}></View>
+                        <Space/>
                     </View>
 
                 </View>

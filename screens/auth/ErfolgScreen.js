@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  AsyncStorage,
-  StyleSheet,
-  View,
-  Button,
-  TextInput,
-  Text,
-  Alert
-
-} from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 
 export default class ErfolgScreen extends React.Component {

@@ -1,66 +1,31 @@
 import * as React from 'react';
-import {
-  AsyncStorage,
-  StyleSheet,
-  View,
-  Button,
-  TextInput,
-  Text,
-  Alert,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  Linking
-
-} from 'react-native';
+import { KeyboardAvoidingView, Linking, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import * as Font from 'expo-font';
+import Space from '../../components/Space';
+
 
 
 export default class RegisterScreen3 extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      emailConfirmation: '',
-      firstname: '',
-      lastname: '',
-      password: '',
-      passwordConfirmation: '',
-    };
-  }
-  componentDidMount() {
-    Font.loadAsync({
-      'monserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
-      'monserrat': require('../../assets/fonts/Montserrat-Regular.ttf'),
-    });
-  }
+  
   static navigationOptions = {
     header: null,
   };
-
-  /* tbd
-  async componentDidMount(){
-
-  }
-  */
-
-
 
   render() {
 
     return (
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingView style={styles.contentContainer} behavior="padding">
-          <View style={styles.space}></View>
+          <Space/>
           <View styles={styles.message}>
             <Text style={styles.asdf}>Passwort</Text>
           </View>
-          <View style={styles.space}></View>
+          <Space/>
           <View style={styles.InputContainer}>
 
             <View style={styles.space}>
-              <View style={styles.space}></View>
+              <Space/>
               <View style={{ flex: 10 }}>
                 <Text style={styles.text}>Jetzt nur noch ein sicheres Passwort setzten, welches du dir idealerweise auch merken kannst und schon geht es los mit einer viel spannenderen Pause.</Text>
                 
@@ -75,22 +40,22 @@ export default class RegisterScreen3 extends React.Component {
                 
               </View>
 
-              <View style={styles.space}></View>
+              <Space/>
             </View>
-            <View style={styles.space}></View>
+            <Space/>
 
            
 
           </View>
 
           <View style={styles.buttonContainer}>
-            <View style={styles.space}></View>
+            <Space/>
             <View style={styles.space}>
-              <View style={styles.space}></View>
+              <Space/>
               <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register2')}>
                 <Text style={styles.buttonText}>Habe es mir gemerkt!</Text>
               </TouchableOpacity>
-              <View style={styles.space}></View>
+              <Space/>
             </View>
             <View style={{flex:1, flexDirection:'column'}}>
               <Text style={styles.text3}>Mit Absenden deiner Daten erklärst du dich einverstanden mit unseren <Text style={styles.text4} onPress={()=> Linking.openURL('https://www.notion.so/Privacy-b94679c757fb4ddba98be32908a8a412')}>Datenschutzrichtlinien</Text> und den <Text style={styles.text4} onPress={()=> Linking.openURL('https://www.google.com')}>Nutzungsbedinungen</Text> .</Text>
@@ -102,31 +67,6 @@ export default class RegisterScreen3 extends React.Component {
 
     );
   }
-
-  _Erfolgasync = async () => {
-    if (this.state.email == this.state.emailConfirmation && this.state.password == this.state.passwordConfirmation && this.state.firstname !== '' && this.state.lastname !== '') {
-      fetch('http://192.168.2.60:4563/register', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          password: this.state.password,
-        }),
-      })
-      this.props.navigation.navigate('Erfolg');
-    }
-  }
-  /* tbd
-  _signInAsync = async() => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('Main');
-  };
-  */
 
 }
 
