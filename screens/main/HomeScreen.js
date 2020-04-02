@@ -1,8 +1,15 @@
 //import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import { Alert, FlatList, Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Image, Modal, StyleSheet, Text, TouchableOpacity, View, RefreshControl, ActivityIndicator} from 'react-native';
 
 export default class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    //True to show the loader
+    this.state = { refreshing: true };
+    //Running the getData Service for the first time
+    this.GetData();
+  }
   static navigationOptions = {
     header: null,
   };
@@ -13,15 +20,36 @@ export default class HomeScreen extends React.Component {
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
+  GetData = () => {
+    //Hier unsere API einfügen, ist nur platzhalter
+    return fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState({
+          refreshing: false,
+          //Setting the data source for the list to render
+          dataSource: responseJson
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+  onRefresh() {
+    //Clear old data of the list
+    this.setState({ dataSource: [] });
+    //Call the Service to get the latest data
+    this.GetData();
+  }
   render() {
-    //Array in das die Daten rein sollen
-    //Die pic Links können api Links sein
-    const list = [
-    { key: 'Baum1', time: 'Noch 20 min', activity: 'Essen gehen', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Birnbaum_am_Lerchenberg_retouched.jpg/310px-Birnbaum_am_Lerchenberg_retouched.jpg' },
-    { key: 'Baum2', time: 'Noch 180 min', activity: 'Essen gehen', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ceiba_sp_branches.jpg/100px-Ceiba_sp_branches.jpg' },
-    { key: 'Baum3', time: 'Noch 150 min', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ceiba_sp_branches.jpg/100px-Ceiba_sp_branches.jpg' },
-    ];
-
+    if (this.state.refreshing) {
+      return (
+        //loading view while data is loading
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
     return (
 
       <View style={styles.container}>
@@ -32,49 +60,50 @@ export default class HomeScreen extends React.Component {
           />
         </View>
 
-        {list.length > 0 ?
-          <FlatList inverted={false} data={list}
-            renderItem={({ item }) => (
-              <View style={styles.contentContainer}>
-                <View style={styles.textContainer}>
-                  <Text style={styles.text1}>
-                    {item.key}
-                  </Text>
-                  <Text style={styles.text2}>
-                    {item.time}
-                  </Text>
-                  {item.activity != null &&
-                    <Text style={styles.text1}>
-                      {item.activity}
-                    </Text>
-                  }
-                </View>
-                <View style={styles.ImageContainer}>
-                  <View style={styles.Imageborder} >
-                    <TouchableOpacity onPress={() => {
-                      this.setModalVisible(true); 
-                    }}>
-                    <Image style={styles.Image}
-                      source={{ uri: item.pic }}
-                    />
-                    </TouchableOpacity>
-                  </View>
-                </View>
+        {this.state.dataSource.length > 0 && !this.state.refreshing ?
 
-              </View>
+          <FlatList inverted={false}
+          data={this.state.dataSource}
+          keyExtractor={(item, index) => index.toString()}
+          refreshControl={
+            <RefreshControl
+                colors={['#FA7268','#151515']}
+                refreshing={this.props.refreshing}
+                onRefresh={this.onRefresh.bind(this)}
+            />
+        }
 
-            )} />
+
+            renderItem={({item}) => (
+              <Teil name={item.title}
+                    //url={"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fgfoidma.at%2Fsites%2Fdefault%2Ffiles%2Ftextimage%2F1%2Fich-bin-eigentlich-nie-fett-aber-heute-bin-ich-ziemlich-fett.png&f=1&nofb=1" }
+                    activity={'fettsein'}
+                    time={item.id}
+/>
+)
+            } />
+
+
+
 
           :
-          <Text style={{ fontSize: 48, color: 'red' }}>
-            Nichts zu sehen
-                </Text>
+          <View style={{flex:1}}>
+          <Image
+            style={{ width: 31, height: 31}}
+            source={require('../../assets/images/giphy1.png')}
+          />
+
+            <Text style={ {color:'white'}}>
+              asdf
+            </Text>
+
+          </View>
         }
 
         <Modal
           animationType="fade"
           transparent={true}
-          visible={this.state.modalVisible}
+          visible={false}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
@@ -116,6 +145,38 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+function Teil({name , time , activity}){
+  return(
+  <View style={styles.contentContainer}>
+    <View style={styles.textContainer}>
+      <Text style={styles.text1}>
+        {name}
+      </Text>
+      <Text style={styles.text2}>
+        {time}
+      </Text>
+
+        <Text style={styles.text1}>
+          {activity}
+        </Text>
+
+
+    </View>
+    <View style={styles.ImageContainer}>
+      <View style={styles.Imageborder} >
+        <TouchableOpacity onPress={() => {
+          this.setModalVisible(true);
+        }}>
+        <Image style={styles.Image}
+          source={{ uri: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fgfoidma.at%2Fsites%2Fdefault%2Ffiles%2Ftextimage%2F1%2Fich-bin-eigentlich-nie-fett-aber-heute-bin-ich-ziemlich-fett.png&f=1&nofb=1' }} //hier muss später eine Api Anbindung rein
+        />
+        </TouchableOpacity>
+      </View>
+    </View>
+
+  </View>
+);
+}
 //Style
 const styles = StyleSheet.create({
   container: {
@@ -169,13 +230,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#FFF',
     textAlign: 'center',
-    fontFamily: 'montserrat-bold'
+    //fontFamily: 'montserrat-bold'
   },
   text2: {
     fontSize: 17,
     color: '#FA7268',
     textAlign: 'center',
-    fontFamily: 'montserrat-bold'
+    //fontFamily: 'montserrat-bold'
   },
   ImageContainer: {
     flex: 1,
