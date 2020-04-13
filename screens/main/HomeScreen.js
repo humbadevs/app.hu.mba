@@ -1,25 +1,25 @@
 //import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import { Alert, FlatList, Image, Modal, StyleSheet, Text, TouchableOpacity, View, RefreshControl, ActivityIndicator} from 'react-native';
+import Space from '../../components/Space';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     //True to show the loader
-    this.state = { refreshing: true };
+    this.state = { refreshing: true, modalVisible: false, selected: 0 };
     //Running the getData Service for the first time
     this.GetData();
   }
   static navigationOptions = {
     header: null,
   };
-  state = {
-    modalVisible: false,
-  };
-
+  onSelect = (id) => {
+    this.setState({ selected: id})
+  }
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
-  }
+  };
   GetData = () => {
     //Hier unsere API einfügen, ist nur platzhalter
     return fetch('https://jsonplaceholder.typicode.com/posts')
@@ -40,8 +40,10 @@ export default class HomeScreen extends React.Component {
     this.setState({ dataSource: [] });
     //Call the Service to get the latest data
     this.GetData();
-  }
+  };
   render() {
+
+
     if (this.state.refreshing) {
       return (
         //loading view while data is loading
@@ -65,9 +67,10 @@ export default class HomeScreen extends React.Component {
           <FlatList inverted={false}
           data={this.state.dataSource}
           keyExtractor={(item, index) => index.toString()}
+          extraData={this.state.selected}
           refreshControl={
             <RefreshControl
-                colors={['#FA7268','#151515']}
+                colors={['#FA7268','#151515', ]}
                 refreshing={this.props.refreshing}
                 onRefresh={this.onRefresh.bind(this)}
             />
@@ -76,16 +79,14 @@ export default class HomeScreen extends React.Component {
 
             renderItem={({item}) => (
               <Teil name={item.title}
-                    //url={"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fgfoidma.at%2Fsites%2Fdefault%2Ffiles%2Ftextimage%2F1%2Fich-bin-eigentlich-nie-fett-aber-heute-bin-ich-ziemlich-fett.png&f=1&nofb=1" }
+                    url={"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fgfoidma.at%2Fsites%2Fdefault%2Ffiles%2Ftextimage%2F1%2Fich-bin-eigentlich-nie-fett-aber-heute-bin-ich-ziemlich-fett.png&f=1&nofb=1" }
                     activity={'fettsein'}
                     time={item.id}
-/>
-)
+                    selected={this.state.selected == item.id ? true : false}
+                    onSelect={this.onSelect}
+                    />
+                    )
             } />
-
-
-
-
           :
           <View style={{flex:1}}>
           <Image
@@ -145,38 +146,54 @@ export default class HomeScreen extends React.Component {
   }
 }
 
-function Teil({name , time , activity}){
+function Teil({name , time , activity, url, selected, onSelect}){
+
   return(
   <View style={styles.contentContainer}>
+  {selected ?
     <View style={styles.textContainer}>
+    <TouchableOpacity onPress={() => onSelect(0)} style={styles.space}/>
+      <View style={styles.space}>
+      <TouchableOpacity onPress={() => onSelect(0)} style={styles.space}/>
+        <TouchableOpacity //onPress={}
+        style={styles.Button}>
+          <Text style={styles.text1}>
+            Anfragen
+          </Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => onSelect(0)} style={styles.space}/>
+      </View>
+<TouchableOpacity onPress={() => onSelect(0)} style={styles.space}/>
+    </View>
+    :
+    <View style={styles.textContainer}>
+    <TouchableOpacity onPress={() => onSelect(time)}>
       <Text style={styles.text1}>
         {name}
       </Text>
       <Text style={styles.text2}>
         {time}
       </Text>
-
         <Text style={styles.text1}>
           {activity}
         </Text>
-
-
+        </TouchableOpacity>
     </View>
+  }
     <View style={styles.ImageContainer}>
       <View style={styles.Imageborder} >
-        <TouchableOpacity onPress={() => {
-          this.setModalVisible(true);
-        }}>
         <Image style={styles.Image}
-          source={{ uri: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fgfoidma.at%2Fsites%2Fdefault%2Ffiles%2Ftextimage%2F1%2Fich-bin-eigentlich-nie-fett-aber-heute-bin-ich-ziemlich-fett.png&f=1&nofb=1' }} //hier muss später eine Api Anbindung rein
+          source={{ uri: url }}
         />
-        </TouchableOpacity>
       </View>
     </View>
 
   </View>
+
 );
+
 }
+
 //Style
 const styles = StyleSheet.create({
   container: {
@@ -291,10 +308,10 @@ const styles = StyleSheet.create({
   },
   Button: {
     backgroundColor: '#FA7268',
-    borderRadius: 10,
+    borderRadius: 8,
     marginRight: 5,
     marginLeft: 5,
-    flex: 1,
+    flex: 1.5,
     justifyContent: 'center'
   }
 });
