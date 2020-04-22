@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/main/HomeScreen';
-import NewScreen from '../screens/main/NewScreen';
+import ChatScreen from '../screens/main/ChatScreen';
 
 import LinksScreen from '../screens/main/LinksScreen';
 import SettingsScreen from '../screens/main/SettingsScreen';
@@ -38,15 +38,15 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const NewStack = createStackNavigator( //your Code goes here!
+const ChatStack = createStackNavigator( //your Code goes here!
   {
-    New: NewScreen,
+    Chat: ChatScreen,
   },
   config
 );
 
-NewStack.navigationOptions = { //was unten in der Leiste steht
-  tabBarLabel: 'New',
+ChatStack.navigationOptions = { //was unten in der Leiste steht
+  tabBarLabel: 'Chat',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -59,7 +59,7 @@ NewStack.navigationOptions = { //was unten in der Leiste steht
   ),
 };
 
-NewStack.path = ''; //auch nicht vergessen!
+ChatStack.path = ''; //auch nicht vergessen!
 
 const LinksStack = createStackNavigator(
   {
@@ -95,7 +95,7 @@ SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  NewStack,
+  ChatStack,
   LinksStack,
   SettingsStack,
 }); //hier auch hinzufügen
