@@ -1,12 +1,14 @@
 import React from 'react'
-import {StyleSheet, Text} from 'react-native'
-import { GiftedChat, Bubble } from 'react-native-gifted-chat'
+import {View, StyleSheet, Text} from 'react-native'
+import { GiftedChat, Bubble, MessageText, Day, Composer } from 'react-native-gifted-chat'
 
 export default class ChatScreen extends React.Component {
   state = {
     messages: [],
   }
-
+  static navigationOptions = {
+    header: null,
+  };
   componentDidMount() {
     this.setState({
       messages: [
@@ -31,16 +33,18 @@ export default class ChatScreen extends React.Component {
     }))
   }
 
-  //renderMessageText (props){
-  //  return(
-  //  <Text
-  //      {...props}
-  //      style={{
-  //        color:'#FFF'
-  //      }}
-  //    />
-  //  );
-  //}
+  renderMessageText (props){
+   return(
+   <MessageText
+       {...props}
+       customTextStyle={{
+         color:'#FFF',
+         fontFamily: "monserrat",
+         fontSize: 13
+       }}
+     />
+   );
+  }
 
   renderBubble (props) {
     return(
@@ -58,9 +62,49 @@ export default class ChatScreen extends React.Component {
     );
   }
 
+  renderDay (props){
+    return(
+      <Day
+        {...props}
+          containerStyle={{
+            backgroundColor: '#FA7268',
+            height: 24,
+            width: 123,
+            alignSelf: 'center',
+            borderRadius: 15
+          }}
+          textStyle={{
+            color:'#FFF',
+            fontFamily: "monserrat-bold",
+            fontSize: 11
+          }}
+      />
+    )
+  }
+
+  renderComposer (props){
+    return(
+      <Composer
+        {...props}
+          textInputStyle={{
+            backgroundColor: 'rgba(250, 114, 104, 0.7)',
+            fontFamily: 'monserrat',
+            color:'#FFF',
+            fontSize: 14,
+            borderRadius: 30,
+            
+          }}
+          placeholderTextColor={
+            "#FFF"
+          }
+      />
+    )
+  }
+
 
   render() {
     return (
+      <View style={styles.container}>
       <GiftedChat
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
@@ -68,9 +112,14 @@ export default class ChatScreen extends React.Component {
           _id: 1,
         }}
         renderBubble={this.renderBubble}
-        placeholder={'test'}
+        placeholder={'Hier tippen um zu schreiben'}
         renderMessageText={this.renderMessageText}
+        renderDay={this.renderDay}
+        timeFormat={"HH:mm"}
+        dateFormat={"DD.MM.YYYY"}
+        renderComposer={this.renderComposer}
       />
+      </View>
     )
   }
 }

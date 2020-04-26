@@ -52,7 +52,7 @@ export default class HomeScreen extends React.Component {
                 <View style={styles.ImageContainer}>
                   <View style={styles.Imageborder} >
                     <TouchableOpacity onPress={() => {
-                      this.setModalVisible(true); 
+                      this.setModalVisible(true);
                     }}>
                     <Image style={styles.Image}
                       source={{ uri: item.pic }}
@@ -169,13 +169,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#FFF',
     textAlign: 'center',
-    fontFamily: 'montserrat-bold'
+    fontFamily: 'monserrat-bold'
   },
   text2: {
     fontSize: 17,
     color: '#FA7268',
     textAlign: 'center',
-    fontFamily: 'montserrat-bold'
+    fontFamily: 'monserrat-bold'
   },
   ImageContainer: {
     flex: 1,
