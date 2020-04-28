@@ -47,6 +47,7 @@ const ChatStack = createStackNavigator( //your Code goes here!
 
 ChatStack.navigationOptions = { //was unten in der Leiste steht
   tabBarLabel: 'Chat',
+  tabBarVisible: false,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
