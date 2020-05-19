@@ -7,7 +7,7 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     //True to show the loader
-    this.state = { refreshing: true, modalVisible: false, selected: 0, dataSource: [] };
+    this.state = { refreshing: true, modalVisible: false, selected: 0, dataSource: [], leer: [{key: 'a'}]};
     //Running the getData Service for the first time
     this.GetData();
   }
@@ -76,19 +76,27 @@ export default class HomeScreen extends React.Component {
                 source={require('../../assets/images/icon_transparent_bg_humba.png')}
               />
             </View>
+            <FlatList inverted={false}
+              data={this.state.leer}
+            refreshControl={
+                <RefreshControl
+                  colors={['#151515']}
+                  refreshing={this.props.refreshing}
+                  onRefresh={this.onRefresh.bind(this)}
+                  progressBackgroundColor={'#FA7268'}
+                />
+              }
+              renderItem={({ item }) => (
+                <View style={{ flex: 1 }}>
+                  <Image
+                    style={{ flex: 1, resizeMode: 'contain' }}
+                    source={require('../../assets/images/giphy1.png')}
+                  />
+                  <Text style={styles.text1}>Es scheint niemand eine Freistunde zu haben</Text>
+                </View>
+              )
+              } />
 
-            <View style={{ flex: 1 }}>
-              <Image
-                style={{ flex: 1, resizeMode: 'contain' }}
-                source={require('../../assets/images/giphy1.png')}
-              />
-              <Text style={styles.text1}>
-                asdf
-          </Text>
-              <TouchableOpacity style={styles.Button} onPress={this.onRefresh.bind(this)}>
-                <Text>Refrsh</Text>
-              </TouchableOpacity>
-            </View>
           </View>
         );
 
@@ -119,7 +127,7 @@ export default class HomeScreen extends React.Component {
               }
               renderItem={({ item }) => (
                 <Teil name={item.firstname + " " + item.lastname}
-                  url={"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fgfoidma.at%2Fsites%2Fdefault%2Ffiles%2Ftextimage%2F1%2Fich-bin-eigentlich-nie-fett-aber-heute-bin-ich-ziemlich-fett.png&f=1&nofb=1"}
+                  url={"https://beta.hu.mba/assets/images/logo.png"}
                   activity={null}
                   time={'hat gerade Freistunde!'}
                   selected={this.state.selected == item._id ? true : false}
@@ -163,11 +171,11 @@ function Teil({ name, time, activity, url, selected, onSelect }) {
             <Text style={styles.text2}>
               {time}
             </Text>
-           
+
             <Text style={styles.text1}>
               {activity}
             </Text>
-              
+
           </TouchableOpacity>
         </View>
       }

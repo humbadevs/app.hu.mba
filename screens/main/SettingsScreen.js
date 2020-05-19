@@ -19,7 +19,13 @@ export default class SettingsScreen extends React.Component{
 
   render() {
      return (
-       <View styles={styles.container}>
+       <View style={styles.container}>
+         <View style={styles.header}>
+            <Image
+              style={{ width: 31, height: 31, }}
+              source={require('../../assets/images/icon_transparent_bg_humba.png')}
+            />
+          </View>
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={this._signOutAsync}>
               <Text style={styles.buttonText}> Actually, sign me out :) </Text>
@@ -42,7 +48,7 @@ export default class SettingsScreen extends React.Component{
               <Text style={styles.buttonText}> Datenschutzerklärung </Text>
             </TouchableOpacity>
           </View>
-      </View>
+          </View>
     );
    }
    _setUnterricht = async() =>{
@@ -101,40 +107,38 @@ SettingsScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#151515'
+   backgroundColor: '#151515'
   },
-  contentContainer: {
-    paddingTop: 30,
-    backgroundColor: '#151515'
-  },
+  
   welcome: {
     alignItems: 'center',
     marginTop: 250,
     marginBottom: 20,
   },
   buttonContainer: {
-    //marginTop: 200,
+    marginTop: 20,
     alignItems: 'center',
   },
   button: {
-    borderRadius: 500,
+    borderRadius: 10,
     backgroundColor: '#FA7268',
     width: 300,
     height: 40,
     marginTop: 5,
-    borderColor: 'black',
-    borderWidth: 3,
-    alignItems: 'center',
-    
-    
-    
+    alignItems: 'center'
   },
   buttonText: {
-    
+    fontFamily: 'monserrat',
     color: 'white',
     textAlignVertical: 'center',
     marginTop: 5
   
-  }
+  },
+  header: {
+    backgroundColor: '#151515',
+    marginTop: 10,
+    marginBottom: 10,
+    alignItems: 'center',
 
+  },
 });
