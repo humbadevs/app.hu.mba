@@ -11,6 +11,13 @@ export default class RegisterScreen extends React.Component {
     header: null,
   };
 
+  constructor(props) {
+    super(props);
+    
+    this.state = { email: '', firstname: '', lastname: '', password: '', birthdate: '', };
+
+  }
+
   render() {
 
     return (
@@ -29,19 +36,26 @@ export default class RegisterScreen extends React.Component {
                 <Text style={styles.text}>Da humba vorerst nur für Schüler des Humboldt Gymnasiums Berlin-Tegel verfügbar ist, benötigen wir nur deine Schul-E-Mail, an welche wir eine Bestätigungsmail schicken werden.</Text>
                 
                 <TextInput style={styles.form}
-                  placeholder="vorname.nachname"
+                  placeholder="vorname.nachname@humboldtschule-berlin.eu"
                   onChangeText={(email) => this.setState({ email })}
                 />
-                <Text style={styles.text2}>@humboldtschule-berlin.eu</Text>
                 <TextInput style={styles.form}
-                  placeholder="Passwort"
-                  secureTextEntry={true}
-                  onChangeText={(Passwort) => this.setState({ Passwort })}
+                  placeholder="Vorname"
+                  onChangeText={(firstname) => this.setState({ firstname })}
                 />
                 <TextInput style={styles.form}
+                  placeholder="Nachname"
+                  onChangeText={(lastname) => this.setState({ lastname })}
+                />
+                
+                <TextInput style={styles.form}
                   placeholder="Passwort"
+                  onChangeText={(password) => this.setState({ password })}
                   secureTextEntry={true}
-                  onChangeText={(Passwort2) => this.setState({ Passwort2 })}
+                />
+                <TextInput style={styles.form}
+                  placeholder="Geburtsdatum"
+                  onChangeText={(birthdate) => this.setState({ birthdate })}
                 />
               </View>
 
@@ -68,9 +82,26 @@ export default class RegisterScreen extends React.Component {
 
     );
   }
-_register = async() => {  
-  this.props.navigation.navigate('AuthLoading')
-}
+
+  _register = async() => {  
+
+    fetch('https://api.hu.mba/user', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          firstname: this.state.firstname,
+          lastname: this.state.lastname,
+          password: this.state.password,
+          birthdate: this.state.birthdate,
+        }) 
+      })
+
+    this.props.navigation.navigate('AuthLoading');
+  }
  
 }
 
@@ -97,6 +128,7 @@ const styles = StyleSheet.create({
   InputContainer: {
     alignItems: 'flex-start',
     flex: 1,
+    marginBottom: 50
   },
   buttonContainer: {
     flex: 1,
@@ -121,7 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     backgroundColor:'white',
     padding:4,
-    marginTop:5
+    marginTop:5,
 
   },
   asdf: {
