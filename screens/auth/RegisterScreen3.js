@@ -16,7 +16,7 @@ export default class RegisterScreen3 extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView style={styles.contentContainer} behavior="padding">
+        <KeyboardAvoidingView style={styles.contentContainer}>
           <Space/>
           <View styles={styles.message}>
             <Text style={styles.asdf}>Passwort</Text>

@@ -1,5 +1,9 @@
 {
   "expo": {
+    "androidStatusBar": {
+      "backgroundColor": "#252525",
+      "translucent": false
+    },
     "name": "Humba",
     "slug": "humba",
     "privacy": "public",

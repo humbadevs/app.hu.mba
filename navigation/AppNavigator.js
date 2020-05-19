@@ -29,7 +29,7 @@ export default createAppContainer(
     
   },
   {
-       initialRouteName: 'Main', // usually at AuthLoading
+       initialRouteName: 'AuthLoading', // usually at AuthLoading
      }
    )
 );

@@ -17,14 +17,9 @@ import { SafeAreaView } from 'react-navigation';
 
 export default class SettingsScreen extends React.Component{
 
-
-
   render() {
      return (
-       <SafeAreaView styles={styles.container}>
-        <ScrollView styles={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-
+       <View styles={styles.container}>
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={this._signOutAsync}>
               <Text style={styles.buttonText}> Actually, sign me out :) </Text>
@@ -32,69 +27,85 @@ export default class SettingsScreen extends React.Component{
           </View>
           
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={this._resetmepls}>
-              <Text style={styles.buttonText}> Passwort erneuern? </Text>
+            <TouchableOpacity style={styles.button} onPress={this._setUnterricht}>
+              <Text style={styles.buttonText}> keine Freistunde? </Text>
             </TouchableOpacity>
           </View>
-
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={''}>
-              <Text style={styles.buttonText}> Stundenplan ändern? </Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={''}>
+            <TouchableOpacity style={styles.button} onPress={this._setPause}>
               <Text style={styles.buttonText}> außerplanmäßige Freistunde? </Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={''}>
+            <TouchableOpacity style={styles.button} onPress={()=> Linking.openURL('https://www.notion.so/Privacy-b94679c757fb4ddba98be32908a8a412')}>
               <Text style={styles.buttonText}> Datenschutzerklärung </Text>
             </TouchableOpacity>
           </View>
-
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={''}>
-              <Text style={styles.buttonText}> ... </Text>
-            </TouchableOpacity>
-          </View>
-
-        </ScrollView>
-      </SafeAreaView>
+      </View>
     );
    }
+   _setUnterricht = async() =>{
 
+    fetch('https://api.hu.mba/user', {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        _id: await AsyncStorage.getItem('id'),
+        currentBreak: false,
+      }) 
+    })
 
+    console.log("Freistunde yay");
+
+   }
+
+   _setPause = async () => {
+
+      fetch('https://api.hu.mba/user', {
+        method: 'PATCH',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          _id: await AsyncStorage.getItem('id'),
+          currentBreak: true,
+        }) 
+      })
+
+      console.log("Freistunde yay");
+      
+    };
 
    _signOutAsync = async () => {
-     await AsyncStorage.removeItem('email');
-     await AsyncStorage.removeItem('password');
-     this.props.navigation.navigate('Auth');
+    const userToken = await AsyncStorage.getItem('token');
+    console.log(userToken);
+     await AsyncStorage.removeItem('token');
+
+     this.props.navigation.navigate('AuthLoading');
    };
 
-   _resetmepls = async () => { // to the ResetScreen!
-     this.props.navigation.navigate('Reset');
-   }
 
 
 
 }
 
 SettingsScreen.navigationOptions = {
-  title: 'Einstellungen',
+  header: null
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: 'black'
-
+    backgroundColor: '#151515'
   },
   contentContainer: {
     paddingTop: 30,
-    backgroundColor: '#fff',
+    backgroundColor: '#151515'
   },
   welcome: {
     alignItems: 'center',

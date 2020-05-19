@@ -16,7 +16,7 @@ export default class RegisterScreen2 extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         
-        <KeyboardAvoidingView style={styles.contentContainer} behavior="padding">
+        <KeyboardAvoidingView style={styles.contentContainer} >
           <Space/>
           <View style={{flex:1, alignItems:'center'}}>
             <Space/>

@@ -15,7 +15,7 @@ export default class RegisterScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView style={styles.contentContainer} behavior="padding">
+        <KeyboardAvoidingView style={styles.contentContainer} >
           <Space/>
           <View styles={styles.message}>
             <Text style={styles.asdf}>Registrieren</Text>
@@ -26,13 +26,23 @@ export default class RegisterScreen extends React.Component {
             <View style={styles.space}>
               <Space/>
               <View style={{ flex: 10 }}>
-                <Text style={styles.text}>Da humba vorerst nur für Schüler des Humboldt Gymnasiums Berlin-Tegel verfügbar ist, benötigen wir nur deine Schulemail, an welche wir eine Bestätigungsmail schicken werden.</Text>
+                <Text style={styles.text}>Da humba vorerst nur für Schüler des Humboldt Gymnasiums Berlin-Tegel verfügbar ist, benötigen wir nur deine Schul-E-Mail, an welche wir eine Bestätigungsmail schicken werden.</Text>
                 
                 <TextInput style={styles.form}
                   placeholder="vorname.nachname"
                   onChangeText={(email) => this.setState({ email })}
                 />
                 <Text style={styles.text2}>@humboldtschule-berlin.eu</Text>
+                <TextInput style={styles.form}
+                  placeholder="Passwort"
+                  secureTextEntry={true}
+                  onChangeText={(Passwort) => this.setState({ Passwort })}
+                />
+                <TextInput style={styles.form}
+                  placeholder="Passwort"
+                  secureTextEntry={true}
+                  onChangeText={(Passwort2) => this.setState({ Passwort2 })}
+                />
               </View>
 
               <Space/>
@@ -44,7 +54,7 @@ export default class RegisterScreen extends React.Component {
             <Space/>
             <View style={styles.space}>
               <Space/>
-              <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register2')}>
+              <TouchableOpacity style={styles.button} onPress={this._register}>
                 <Text style={styles.buttonText}> Registrieren </Text>
               </TouchableOpacity>
               <Space/>
@@ -58,7 +68,9 @@ export default class RegisterScreen extends React.Component {
 
     );
   }
-
+_register = async() => {  
+  this.props.navigation.navigate('AuthLoading')
+}
  
 }
 
