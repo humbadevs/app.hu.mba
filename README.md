@@ -13,10 +13,12 @@ To run the app on localhost do the following steps:
 # Clone the repository onto your local machine
 git clone https://github.com/humbadevs/humba-app.git
 cd humba-app
+# Install expo.io
+npm i -g expo-cli
 # Install packages
 npm i
 # start local app
-npm start
+expo start
 # voilà 🎉
 ```
 
