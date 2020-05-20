@@ -1,30 +1,36 @@
 //import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import { Alert, FlatList, Image, Modal, StyleSheet, Text, TouchableOpacity, View, RefreshControl, ActivityIndicator, AsyncStorage } from 'react-native';
+import { Alert, FlatList, Image, Modal, StyleSheet, Text, TouchableOpacity, View, RefreshControl, ActivityIndicator, AsyncStorage, Linking} from 'react-native';
 import Space from '../../components/Space';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     //True to show the loader
-    this.state = { refreshing: true, modalVisible: false, selected: 0, dataSource: [], leer: [{key: 'a'}]};
+    this.state = { refreshing: true, selected: 0, dataSource: [], leer: [{key: 'a'}]};
     //Running the getData Service for the first time
     this.GetData();
   }
   static navigationOptions = {
     header: null,
   };
-  onSelect = (_id) => {
-    this.setState({ selected: _id })
+  onSelect = (id) => {
+    if (this.state.selected==id){
+      this.setState({ selected: 0});
+    }else{
+      this.setState({ selected: id })
+    }
+    
   }
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
-  };
   GetData = () => {
 
     console.log("Bis hier!");
     //Hier unsere API einfügen, ist nur platzhalter
-    return fetch('https://api.hu.mba/user/available')
+    return fetch('https://api.hu.mba/user/available', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+    }})
 
       .then(response => response.json())
       .then(responseJson => {
@@ -129,9 +135,11 @@ export default class HomeScreen extends React.Component {
                 <Teil name={item.firstname + " " + item.lastname}
                   url={"https://beta.hu.mba/assets/images/logo.png"}
                   activity={null}
-                  time={'hat gerade Freistunde!'}
+                  time={'hat Freistunde!'}
                   selected={this.state.selected == item._id ? true : false}
                   onSelect={this.onSelect}
+                  id={item._id}
+                  tel={'tel:' + item.phonenumber}
                 />
               )
               } />
@@ -143,28 +151,28 @@ export default class HomeScreen extends React.Component {
   }
 }
 
-function Teil({ name, time, activity, url, selected, onSelect }) {
+function Teil({ name, time, activity, url, selected, onSelect, id, tel }) {
 
   return (
     <View style={styles.contentContainer}>
       {selected ?
         <View style={styles.textContainer}>
-          <TouchableOpacity onPress={() => onSelect(0)} style={styles.space} />
+          <TouchableOpacity onPress={() => onSelect(id)} style={styles.space} />
           <View style={styles.space}>
-            <TouchableOpacity onPress={() => onSelect(0)} style={styles.space} />
-            <TouchableOpacity //onPress={}
+            <TouchableOpacity onPress={() => onSelect(id)} style={styles.space} />
+            <TouchableOpacity onPress={()=> Linking.openURL(tel)}
               style={styles.Button}>
               <Text style={styles.text1}>
                 Anfragen
-      </Text>
+                </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => onSelect(0)} style={styles.space} />
+            <TouchableOpacity onPress={() => onSelect(id)} style={styles.space} />
           </View>
-          <TouchableOpacity onPress={() => onSelect(0)} style={styles.space} />
+          <TouchableOpacity onPress={() => onSelect(id)} style={styles.space} />
         </View>
         :
         <View style={styles.textContainer}>
-          <TouchableOpacity onPress={() => onSelect(time)}>
+          <TouchableOpacity onPress={() => onSelect(id)}>
             <Text style={styles.text1}>
               {name}
             </Text>

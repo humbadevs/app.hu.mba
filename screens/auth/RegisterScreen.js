@@ -14,7 +14,7 @@ export default class RegisterScreen extends React.Component {
   constructor(props) {
     super(props);
     
-    this.state = { email: '', firstname: '', lastname: '', password: '', birthdate: '', };
+    this.state = { email: '', firstname: '', lastname: '', password: '', birthdate: '', phone: ''};
 
   }
 
@@ -32,7 +32,7 @@ export default class RegisterScreen extends React.Component {
 
             <View style={styles.space}>
               <Space/>
-              <View style={{ flex: 10 }}>
+              <View style={{ flex: 15 }}>
                 <Text style={styles.text}>Da humba vorerst nur für Schüler des Humboldt Gymnasiums Berlin-Tegel verfügbar ist, benötigen wir nur deine Schul-E-Mail, an welche wir eine Bestätigungsmail schicken werden.</Text>
                 
                 <TextInput style={styles.form}
@@ -55,7 +55,14 @@ export default class RegisterScreen extends React.Component {
                 />
                 <TextInput style={styles.form}
                   placeholder="Geburtsdatum"
+                  keyboardType={'numeric'}
                   onChangeText={(birthdate) => this.setState({ birthdate })}
+                />
+                 <TextInput style={styles.form}
+                 autoCompleteType={'tel'}
+                 keyboardType={'numeric'}
+                  placeholder="Telefon"
+                  onChangeText={(phone) => this.setState({ phone })}
                 />
               </View>
 
@@ -97,6 +104,7 @@ export default class RegisterScreen extends React.Component {
           lastname: this.state.lastname,
           password: this.state.password,
           birthdate: this.state.birthdate,
+          phonenumber: this.state.phone,
         }) 
       })
 
@@ -127,7 +135,7 @@ const styles = StyleSheet.create({
   },
   InputContainer: {
     alignItems: 'flex-start',
-    flex: 1,
+    flex: 3,
     marginBottom: 50
   },
   buttonContainer: {

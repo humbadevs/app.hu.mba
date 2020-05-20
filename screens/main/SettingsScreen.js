@@ -12,6 +12,7 @@ import {
   TextInput,
   Alert,
   AsyncStorage,
+  Linking
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
@@ -90,7 +91,7 @@ export default class SettingsScreen extends React.Component{
    _signOutAsync = async () => {
     const userToken = await AsyncStorage.getItem('token');
     console.log(userToken);
-     await AsyncStorage.removeItem('token');
+     await AsyncStorage.clear();
 
      this.props.navigation.navigate('AuthLoading');
    };
